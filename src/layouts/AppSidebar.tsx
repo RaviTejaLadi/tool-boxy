@@ -1,9 +1,9 @@
-import type * as React from 'react';
+import type { ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
 import { CropIcon, PackageIcon, TerminalIcon } from '@phosphor-icons/react';
 
-import { NavMain } from '@/components/nav-main';
-import { NavProjects } from '@/components/nav-projects';
+import { NavMain } from '@/layouts/NavMain';
+import { NavProjects } from '@/layouts/NavProjects';
 import {
   Sidebar,
   SidebarContent,
@@ -31,7 +31,9 @@ const projects = [
   },
 ];
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export type AppSidebarProps = ComponentProps<typeof Sidebar>;
+
+export function AppSidebar(props: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -43,7 +45,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">Tool Boxy</span>
-                <span className="truncate text-xs">Toolkit</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>

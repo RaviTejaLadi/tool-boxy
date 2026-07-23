@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { CaretRightIcon } from '@phosphor-icons/react';
+import type { ReactNode } from 'react';
 
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
@@ -13,20 +14,24 @@ import {
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
 
-export function NavMain({
-  items,
-}: {
-  items: {
-    title: string;
-    url: string;
-    icon?: React.ReactNode;
-    isActive?: boolean;
-    items?: {
-      title: string;
-      url: string;
-    }[];
-  }[];
-}) {
+type NavMainSubItem = {
+  title: string;
+  url: string;
+};
+
+type NavMainItem = {
+  title: string;
+  url: string;
+  icon?: ReactNode;
+  isActive?: boolean;
+  items?: NavMainSubItem[];
+};
+
+export type NavMainProps = {
+  items: NavMainItem[];
+};
+
+export function NavMain({ items }: NavMainProps) {
   const { pathname } = useLocation();
 
   return (

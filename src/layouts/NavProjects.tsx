@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import type { ReactNode } from 'react';
 
 import {
   SidebarGroup,
@@ -8,15 +9,17 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 
-export function NavProjects({
-  projects,
-}: {
-  projects: {
-    name: string;
-    url: string;
-    icon: React.ReactNode;
-  }[];
-}) {
+type NavProjectItem = {
+  name: string;
+  url: string;
+  icon: ReactNode;
+};
+
+export type NavProjectsProps = {
+  projects: NavProjectItem[];
+};
+
+export function NavProjects({ projects }: NavProjectsProps) {
   const { pathname } = useLocation();
 
   return (
