@@ -1,6 +1,6 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
-import { ModeToggle } from '@/components/mode-toggle';
+import { ModeToggle } from '@/components/theme/mode-toggle';
 import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
@@ -9,15 +9,17 @@ import { cn } from '@/lib/utils';
 
 const quickRoutes = [
   { label: 'Home', to: '/' },
-  { label: 'Playground', to: '/playground' },
   { label: 'Design', to: '/projects/design' },
 ] as const;
 
 export default function AppLayout() {
+  const { pathname } = useLocation();
+  const isFullBleed = pathname === '/code-snippet';
+
   return (
-    <SidebarProvider>
+    <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className={isFullBleed ? 'min-h-0 overflow-hidden' : undefined}>
         <header className="flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-10">
           <div className="flex flex-1 items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
@@ -45,7 +47,7 @@ export default function AppLayout() {
             <ModeToggle />
           </div>
         </header>
-        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+        <div className={cn('flex flex-1 flex-col', isFullBleed ? 'min-h-0 overflow-hidden' : 'gap-4 p-4 pt-0')}>
           <Outlet />
         </div>
       </SidebarInset>

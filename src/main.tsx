@@ -2,15 +2,18 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
-import { ThemeProvider } from '@/components/theme-provider';
+import { ThemeProvider } from '@/components/theme/theme-provider.tsx';
 import { TooltipProvider } from '@/components/ui/tooltip.tsx';
+import { ErrorBoundary } from './components/ErrorBoundary.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme="system" storageKey="tool-boxy-theme">
-      <TooltipProvider>
-        <App />
-      </TooltipProvider>
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider defaultTheme="system" storageKey="tool-boxy-theme">
+        <TooltipProvider>
+          <App />
+        </TooltipProvider>
+      </ThemeProvider>
+    </ErrorBoundary>
   </StrictMode>
 );

@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
-import { CropIcon, PackageIcon, TerminalIcon } from '@phosphor-icons/react';
+import { CodeIcon, CropIcon, PackageIcon, TerminalIcon } from '@phosphor-icons/react';
 
 import { NavMain } from '@/layouts/NavMain';
 import { NavProjects } from '@/layouts/NavProjects';
@@ -20,6 +20,11 @@ const navMain = [
     url: '/playground',
     icon: <TerminalIcon />,
     items: [{ title: 'History', url: '/playground' }],
+  },
+  {
+    title: 'Code Snippet',
+    url: '/code-snippet',
+    icon: <CodeIcon />,
   },
 ];
 
