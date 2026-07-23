@@ -14,7 +14,7 @@ const quickRoutes = [
 
 export default function AppLayout() {
   const { pathname } = useLocation();
-  const isFullBleed = pathname === '/code-snippet';
+  const isFullBleed = pathname === '/code-snippet' || pathname === '/palette-collection';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>

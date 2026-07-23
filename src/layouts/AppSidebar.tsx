@@ -13,6 +13,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
+import { PaletteIcon } from 'lucide-react';
 
 const navMain = [
   {
@@ -25,6 +26,11 @@ const navMain = [
     title: 'Code Snippet',
     url: '/code-snippet',
     icon: <CodeIcon />,
+  },
+  {
+    title: 'Palette Collection',
+    url: '/palette-collection',
+    icon: <PaletteIcon />,
   },
 ];
 
