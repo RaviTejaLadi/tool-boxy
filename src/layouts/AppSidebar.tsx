@@ -1,6 +1,7 @@
 import type { ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
 import { CodeIcon, CropIcon, PackageIcon, TerminalIcon } from '@phosphor-icons/react';
+import { PaletteIcon, Pencil } from 'lucide-react';
 
 import { NavMain } from '@/layouts/NavMain';
 import { NavProjects } from '@/layouts/NavProjects';
@@ -13,7 +14,6 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import { PaletteIcon } from 'lucide-react';
 
 const navMain = [
   {
@@ -31,6 +31,11 @@ const navMain = [
     title: 'Palette Collection',
     url: '/palette-collection',
     icon: <PaletteIcon />,
+  },
+  {
+    title: 'Palette Generator',
+    url: '/palette-generator',
+    icon: <Pencil />,
   },
 ];
 

@@ -5,6 +5,7 @@ import CodeSnippetPage from './pages/CodeSnippetPage';
 import Home from './pages/Home';
 import SamplePage from './pages/SamplePage';
 import PaletteCollectionPage from './pages/PaletteCollectionPage';
+import PaletteGeneratorPage from './pages/PaletteGeneratorPage';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: 'code-snippet', Component: CodeSnippetPage },
       { path: 'projects/design', Component: SamplePage },
       { path: 'palette-collection', Component: PaletteCollectionPage },
+      { path: 'palette-generator', Component: PaletteGeneratorPage },
     ],
   },
 ]);

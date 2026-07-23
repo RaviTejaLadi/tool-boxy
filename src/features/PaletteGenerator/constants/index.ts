@@ -1,0 +1,1 @@
+export { NAME_BANK, MIN_COLORS, MAX_COLORS, DEFAULT_COLOR_COUNT } from './names';
