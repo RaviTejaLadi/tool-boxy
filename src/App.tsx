@@ -1,10 +1,18 @@
-import { createBrowserRouter, RouterProvider } from 'react-router';
-import Home from './pages/Home';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-let router = createBrowserRouter([
+import AppLayout from './layouts/AppLayout';
+import Home from './pages/Home';
+import SamplePage from './pages/SamplePage';
+
+const router = createBrowserRouter([
   {
     path: '/',
-    Component: Home,
+    Component: AppLayout,
+    children: [
+      { index: true, Component: Home },
+      { path: 'playground', Component: SamplePage },
+      { path: 'projects/design', Component: SamplePage },
+    ],
   },
 ]);
 

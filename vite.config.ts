@@ -12,4 +12,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  server: {
+    open: true,
+    port: 1010,
+  },
 });
