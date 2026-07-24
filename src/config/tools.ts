@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { AudioWaveform, Crop, FileCode2, Palette, Pencil, Terminal } from 'lucide-react';
+import { AudioWaveform, Crop, FileCode2, FileText, Palette, Pencil, Terminal } from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'Developer' | 'Projects';
 
@@ -45,6 +45,15 @@ export const tools: Tool[] = [
     category: 'Developer',
     icon: FileCode2,
     featured: true,
+  },
+  {
+    title: 'Markdown Live Preview',
+    description: 'Write markdown and preview it live side by side',
+    url: '/markdown-live-preview',
+    category: 'Developer',
+    icon: FileText,
+    featured: true,
+    badge: 'New',
   },
   {
     title: 'Playground',
