@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
 import { CodeIcon, CropIcon, PackageIcon, TerminalIcon } from '@phosphor-icons/react';
-import { PaletteIcon, Pencil } from 'lucide-react';
+import { AudioWaveform, PaletteIcon, Pencil } from 'lucide-react';
 
 import { NavMain } from '@/layouts/NavMain';
 import { NavProjects } from '@/layouts/NavProjects';
@@ -36,6 +36,11 @@ const navMain = [
     title: 'Palette Generator',
     url: '/palette-generator',
     icon: <Pencil />,
+  },
+  {
+    title: 'Tailwind Shades',
+    url: '/tailwind-shade-generator',
+    icon: <AudioWaveform />,
   },
 ];
 

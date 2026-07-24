@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import SamplePage from './pages/SamplePage';
 import PaletteCollectionPage from './pages/PaletteCollectionPage';
 import PaletteGeneratorPage from './pages/PaletteGeneratorPage';
+import TailwindShadeGeneratorPage from './pages/TailwindShadeGeneratorPage';
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
       { path: 'projects/design', Component: SamplePage },
       { path: 'palette-collection', Component: PaletteCollectionPage },
       { path: 'palette-generator', Component: PaletteGeneratorPage },
+      { path: 'tailwind-shade-generator', Component: TailwindShadeGeneratorPage },
     ],
   },
 ]);

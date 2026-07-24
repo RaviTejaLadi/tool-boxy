@@ -15,7 +15,10 @@ const quickRoutes = [
 export default function AppLayout() {
   const { pathname } = useLocation();
   const isFullBleed =
-    pathname === '/code-snippet' || pathname === '/palette-collection' || pathname === '/palette-generator';
+    pathname === '/code-snippet' ||
+    pathname === '/palette-collection' ||
+    pathname === '/palette-generator' ||
+    pathname === '/tailwind-shade-generator';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
@@ -25,25 +28,25 @@ export default function AppLayout() {
           <div className="flex flex-1 items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 data-vertical:h-4 data-vertical:self-auto" />
+            <nav className="flex items-center gap-1 px-2">
+              {quickRoutes.map((route) => (
+                <NavLink
+                  key={route.to}
+                  to={route.to}
+                  end={route.to === '/'}
+                  className={({ isActive }) =>
+                    cn(
+                      buttonVariants({ variant: isActive ? 'secondary' : 'ghost', size: 'sm' }),
+                      'text-muted-foreground',
+                      isActive && 'text-foreground'
+                    )
+                  }
+                >
+                  {route.label}
+                </NavLink>
+              ))}
+            </nav>
           </div>
-          <nav className="flex items-center gap-1 px-2">
-            {quickRoutes.map((route) => (
-              <NavLink
-                key={route.to}
-                to={route.to}
-                end={route.to === '/'}
-                className={({ isActive }) =>
-                  cn(
-                    buttonVariants({ variant: isActive ? 'secondary' : 'ghost', size: 'sm' }),
-                    'text-muted-foreground',
-                    isActive && 'text-foreground'
-                  )
-                }
-              >
-                {route.label}
-              </NavLink>
-            ))}
-          </nav>
           <div className="pr-4">
             <ModeToggle />
           </div>

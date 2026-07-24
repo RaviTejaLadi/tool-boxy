@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Lock, Unlock, Copy, Shuffle, Trash2 } from 'lucide-react';
 import { describeColor } from '../helpers';
 import { usePaletteStore } from '../stores';
@@ -13,11 +14,11 @@ async function copyText(text: string, tag: string, flashCopied: (tag: string) =>
 }
 
 export function ColoursList() {
+  const navigate = useNavigate();
   const colors = usePaletteStore((s) => s.colors);
   const copiedTag = usePaletteStore((s) => s.copiedTag);
   const flashCopied = usePaletteStore((s) => s.flashCopied);
   const toggleLock = usePaletteStore((s) => s.toggleLock);
-  const shuffleOne = usePaletteStore((s) => s.shuffleOne);
   const deleteOne = usePaletteStore((s) => s.deleteOne);
 
   return (
@@ -50,7 +51,11 @@ export function ColoursList() {
                   title="Copy hex"
                   onClick={() => void copyText(c.hex, c.id, flashCopied)}
                 />
-                <ColorActionButton icon={Shuffle} title="Shuffle colour" onClick={() => shuffleOne(c.id)} />
+                <ColorActionButton
+                  icon={Shuffle}
+                  title="Open shade generator"
+                  onClick={() => navigate(`/tailwind-shade-generator?hex=${encodeURIComponent(c.hex)}`)}
+                />
                 <ColorActionButton icon={Trash2} title="Delete colour" danger onClick={() => deleteOne(c.id)} />
               </div>
               {copiedTag === c.id && <span className="shrink-0 text-[11px] text-primary">Copied</span>}

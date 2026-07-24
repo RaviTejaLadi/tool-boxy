@@ -1,0 +1,11 @@
+import TailwindShadeGenerator from '@/features/TailwindShadeGenerator';
+
+const TailwindShadeGeneratorPage = () => {
+  return (
+    <div className="flex h-full min-h-0 flex-1 flex-col">
+      <TailwindShadeGenerator />
+    </div>
+  );
+};
+
+export default TailwindShadeGeneratorPage;
