@@ -1,10 +1,8 @@
 import type { ComponentProps } from 'react';
 import { Link } from 'react-router-dom';
-import { CodeIcon, CropIcon, PackageIcon, TerminalIcon } from '@phosphor-icons/react';
-import { AudioWaveform, PaletteIcon, Pencil } from 'lucide-react';
+import { PackageIcon } from '@phosphor-icons/react';
 
 import { NavMain } from '@/layouts/NavMain';
-import { NavProjects } from '@/layouts/NavProjects';
 import {
   Sidebar,
   SidebarContent,
@@ -14,43 +12,9 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
+import { toolCategories, toolsByCategory } from '@/config/tools';
 
-const navMain = [
-  {
-    title: 'Playground',
-    url: '/playground',
-    icon: <TerminalIcon />,
-    items: [{ title: 'History', url: '/playground' }],
-  },
-  {
-    title: 'Code Snippet',
-    url: '/code-snippet',
-    icon: <CodeIcon />,
-  },
-  {
-    title: 'Palette Collection',
-    url: '/palette-collection',
-    icon: <PaletteIcon />,
-  },
-  {
-    title: 'Palette Generator',
-    url: '/palette-generator',
-    icon: <Pencil />,
-  },
-  {
-    title: 'Tailwind Shades',
-    url: '/tailwind-shade-generator',
-    icon: <AudioWaveform />,
-  },
-];
-
-const projects = [
-  {
-    name: 'Design Engineering',
-    url: '/projects/design',
-    icon: <CropIcon />,
-  },
-];
+const navTitle = (title: string) => (title === 'Tailwind Shade Generator' ? 'Tailwind Shades' : title);
 
 export type AppSidebarProps = ComponentProps<typeof Sidebar>;
 
@@ -72,8 +36,20 @@ export function AppSidebar(props: AppSidebarProps) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={navMain} />
-        <NavProjects projects={projects} />
+        {toolCategories.map((category) => (
+          <NavMain
+            key={category}
+            label={category}
+            items={toolsByCategory(category).map((tool) => {
+              const Icon = tool.icon;
+              return {
+                title: navTitle(tool.title),
+                url: tool.url,
+                icon: <Icon />,
+              };
+            })}
+          />
+        ))}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
