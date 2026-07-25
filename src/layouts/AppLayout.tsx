@@ -19,7 +19,8 @@ export default function AppLayout() {
     pathname === '/palette-collection' ||
     pathname === '/palette-generator' ||
     pathname === '/tailwind-shade-generator' ||
-    pathname === '/markdown-live-preview';
+    pathname === '/markdown-live-preview' ||
+    pathname === '/placeholder-generator';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>

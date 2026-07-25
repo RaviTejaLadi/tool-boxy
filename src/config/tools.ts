@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { AudioWaveform, Crop, FileCode2, FileText, Palette, Pencil, Terminal } from 'lucide-react';
+import { AudioWaveform, Crop, FileCode2, FileText, Image, Palette, Pencil, Terminal } from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'Developer' | 'Projects';
 
@@ -52,6 +52,15 @@ export const tools: Tool[] = [
     url: '/markdown-live-preview',
     category: 'Developer',
     icon: FileText,
+    featured: true,
+    badge: 'New',
+  },
+  {
+    title: 'Placeholder Generator',
+    description: 'Generate customisable placeholder images as PNG or SVG',
+    url: '/placeholder-generator',
+    category: 'Developer',
+    icon: Image,
     featured: true,
     badge: 'New',
   },

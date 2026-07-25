@@ -8,6 +8,7 @@ import PaletteCollectionPage from './pages/PaletteCollectionPage';
 import PaletteGeneratorPage from './pages/PaletteGeneratorPage';
 import TailwindShadeGeneratorPage from './pages/TailwindShadeGeneratorPage';
 import MarkdownLivePreviewPage from './pages/MarkdownLivePreviewPage';
+import PlaceholderGeneratorPage from './pages/PlaceholderGeneratorPage';
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       { path: 'palette-generator', Component: PaletteGeneratorPage },
       { path: 'tailwind-shade-generator', Component: TailwindShadeGeneratorPage },
       { path: 'markdown-live-preview', Component: MarkdownLivePreviewPage },
+      { path: 'placeholder-generator', Component: PlaceholderGeneratorPage },
     ],
   },
 ]);
