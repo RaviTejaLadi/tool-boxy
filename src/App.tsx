@@ -16,6 +16,7 @@ import ImageSplitterPage from './pages/ImageSplitterPage';
 import BaseConverterPage from './pages/BaseConverterPage';
 import UnitConverterPage from './pages/UnitConverterPage';
 import PDFViewerPage from './pages/PDFViewerPage';
+import SVGViewerPage from './pages/SVGViewerPage';
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
       { path: 'base-converter', Component: BaseConverterPage },
       { path: 'unit-converter', Component: UnitConverterPage },
       { path: 'pdf-viewer', Component: PDFViewerPage },
+      { path: 'svg-viewer', Component: SVGViewerPage },
     ],
   },
 ]);

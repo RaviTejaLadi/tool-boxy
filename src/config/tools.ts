@@ -2,6 +2,7 @@ import type { LucideIcon } from 'lucide-react';
 import {
   AudioWaveform,
   Binary,
+  CodeXml,
   Crop,
   FileCode2,
   FileText,
@@ -121,6 +122,15 @@ export const tools: Tool[] = [
     url: '/pdf-viewer',
     category: 'Text',
     icon: FileType,
+    featured: true,
+    badge: 'New',
+  },
+  {
+    title: 'SVG Viewer',
+    description: 'Paste SVG code and preview it live with zoom controls',
+    url: '/svg-viewer',
+    category: 'Image',
+    icon: CodeXml,
     featured: true,
     badge: 'New',
   },
