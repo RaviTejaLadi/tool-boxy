@@ -161,7 +161,7 @@ export function PreviewPane() {
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="flex size-[3.5rem] items-center justify-center border border-dashed border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                className="flex size-14 items-center justify-center border border-dashed border-border text-muted-foreground transition-colors hover:border-primary hover:text-primary"
                 title="Replace image"
               >
                 <Upload className="size-4" />
