@@ -11,7 +11,6 @@ import {
   Images,
   Palette,
   Pencil,
-  Terminal,
 } from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'Developer' | 'Projects';
@@ -112,13 +111,6 @@ export const tools: Tool[] = [
     icon: Grid2X2,
     featured: true,
     badge: 'New',
-  },
-  {
-    title: 'Playground',
-    description: 'Experiment with ideas in a scratch space',
-    url: '/playground',
-    category: 'Developer',
-    icon: Terminal,
   },
   {
     title: 'Design Engineering',

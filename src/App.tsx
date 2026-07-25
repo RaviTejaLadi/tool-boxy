@@ -20,7 +20,6 @@ const router = createBrowserRouter([
     Component: AppLayout,
     children: [
       { index: true, Component: Home },
-      { path: 'playground', Component: SamplePage },
       { path: 'code-snippet', Component: CodeSnippetPage },
       { path: 'projects/design', Component: SamplePage },
       { path: 'palette-collection', Component: PaletteCollectionPage },
