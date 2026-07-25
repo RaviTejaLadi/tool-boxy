@@ -15,6 +15,7 @@ import ImageConverterPage from './pages/ImageConverterPage';
 import ImageSplitterPage from './pages/ImageSplitterPage';
 import BaseConverterPage from './pages/BaseConverterPage';
 import UnitConverterPage from './pages/UnitConverterPage';
+import PDFViewerPage from './pages/PDFViewerPage';
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,7 @@ const router = createBrowserRouter([
       { path: 'image-splitter', Component: ImageSplitterPage },
       { path: 'base-converter', Component: BaseConverterPage },
       { path: 'unit-converter', Component: UnitConverterPage },
+      { path: 'pdf-viewer', Component: PDFViewerPage },
     ],
   },
 ]);
