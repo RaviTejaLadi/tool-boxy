@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 import { tools } from '@/config/tools';
 
@@ -18,19 +18,37 @@ function readFavorites(): string[] {
   }
 }
 
+let favorites = readFavorites();
+const listeners = new Set<() => void>();
+
+function emit() {
+  listeners.forEach((listener) => listener());
+}
+
+function getFavorites() {
+  return favorites;
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  return () => listeners.delete(listener);
+}
+
+function setFavorites(next: string[]) {
+  favorites = next;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
+  emit();
+}
+
 export function useToolFavorites() {
-  const [favorites, setFavorites] = useState<string[]>(readFavorites);
+  const current = useSyncExternalStore(subscribe, getFavorites, getFavorites);
 
-  useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(favorites));
-  }, [favorites]);
-
-  const isFavorite = (url: string) => favorites.includes(url);
+  const isFavorite = (url: string) => current.includes(url);
 
   const toggleFavorite = (url: string) => {
     if (!knownUrls.has(url)) return;
-    setFavorites((prev) => (prev.includes(url) ? prev.filter((item) => item !== url) : [...prev, url]));
+    setFavorites(favorites.includes(url) ? favorites.filter((item) => item !== url) : [...favorites, url]);
   };
 
-  return { favorites, isFavorite, toggleFavorite };
+  return { favorites: current, isFavorite, toggleFavorite };
 }
