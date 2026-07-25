@@ -1,0 +1,20 @@
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { UploadSection } from './UploadSection';
+import { FormatSection } from './FormatSection';
+import { OptionsSection } from './OptionsSection';
+import { ImagesSection } from './ImagesSection';
+
+export function ImageConverterSidebar() {
+  return (
+    <aside className="flex max-h-[50svh] w-full shrink-0 flex-col overflow-hidden border-t border-border bg-card lg:h-full lg:max-h-none lg:w-[380px] lg:min-h-0 lg:border-t-0 lg:border-l">
+      <ScrollArea className="h-full">
+        <div className="space-y-7 p-5">
+          <UploadSection />
+          <FormatSection />
+          <OptionsSection />
+          <ImagesSection />
+        </div>
+      </ScrollArea>
+    </aside>
+  );
+}

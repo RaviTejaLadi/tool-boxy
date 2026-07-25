@@ -11,6 +11,7 @@ import MarkdownLivePreviewPage from './pages/MarkdownLivePreviewPage';
 import PlaceholderGeneratorPage from './pages/PlaceholderGeneratorPage';
 import Base64ImageEncoderPage from './pages/Base64ImageEncoderPage';
 import FaviconGeneratorPage from './pages/FaviconGeneratorPage';
+import ImageConverterPage from './pages/ImageConverterPage';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
       { path: 'placeholder-generator', Component: PlaceholderGeneratorPage },
       { path: 'base64-image-encoder', Component: Base64ImageEncoderPage },
       { path: 'favicon-generator', Component: FaviconGeneratorPage },
+      { path: 'image-converter', Component: ImageConverterPage },
     ],
   },
 ]);

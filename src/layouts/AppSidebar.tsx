@@ -84,13 +84,13 @@ export function AppSidebar(props: AppSidebarProps) {
         </SidebarGroup>
 
         {hasResults ? (
-          filteredByCategory.map(({ category, items }) => (
-            <NavMain key={category} label={category} items={items} />
-          ))
+          filteredByCategory.map(({ category, items }) => <NavMain key={category} label={category} items={items} />)
         ) : (
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupContent>
-              <p className="px-2 py-1.5 font-mono text-[11px] text-muted-foreground">No tools match “{query.trim()}”.</p>
+              <p className="px-2 py-1.5 font-mono text-[11px] text-muted-foreground">
+                No tools match “{query.trim()}”.
+              </p>
             </SidebarGroupContent>
           </SidebarGroup>
         )}
