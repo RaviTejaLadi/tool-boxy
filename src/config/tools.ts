@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import {
   AudioWaveform,
+  Binary,
   Crop,
   FileCode2,
   FileText,
@@ -109,6 +110,15 @@ export const tools: Tool[] = [
     url: '/image-splitter',
     category: 'Developer',
     icon: Grid2X2,
+    featured: true,
+    badge: 'New',
+  },
+  {
+    title: 'Base Converter',
+    description: 'Convert between decimal, hex, binary, octal and bitwise ops',
+    url: '/base-converter',
+    category: 'Developer',
+    icon: Binary,
     featured: true,
     badge: 'New',
   },
