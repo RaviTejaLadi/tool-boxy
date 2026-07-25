@@ -79,7 +79,7 @@ export function CodeEditor() {
         wrap={wordWrap ? 'soft' : 'off'}
         placeholder="Paste your SVG code here..."
         aria-label="SVG code editor"
-        className="absolute inset-0 size-full resize-none overflow-auto border-0 bg-transparent py-3 pr-4 font-mono text-transparent caret-foreground outline-none selection:bg-primary/30 placeholder:text-muted-foreground [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="absolute inset-0 size-full resize-none overflow-auto border-0 bg-transparent py-3 pr-4 font-mono text-transparent caret-foreground outline-none selection:bg-primary/30 placeholder:text-muted-foreground scrollbar-none [&::-webkit-scrollbar]:hidden"
         style={{
           fontSize: EDITOR_FONT_SIZE,
           lineHeight: `${EDITOR_LINE_HEIGHT}px`,

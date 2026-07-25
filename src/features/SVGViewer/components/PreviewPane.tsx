@@ -119,7 +119,7 @@ export function PreviewPane() {
         <Tabs value={previewTab} onValueChange={(v) => setPreviewTab(v as PreviewTab)} className="min-w-0 flex-1">
           <TabsList
             variant="line"
-            className="h-8 max-w-full justify-start gap-0 overflow-x-auto overflow-y-hidden rounded-none p-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="h-8 max-w-full justify-start gap-0 overflow-x-auto overflow-y-hidden rounded-none p-0 scrollbar-none [&::-webkit-scrollbar]:hidden"
           >
             {PREVIEW_TABS.map((tab) => (
               <TabsTrigger

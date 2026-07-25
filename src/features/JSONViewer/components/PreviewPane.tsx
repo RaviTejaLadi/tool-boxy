@@ -46,7 +46,7 @@ export function PreviewPane() {
         <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as ViewMode)} className="min-w-0 flex-1">
           <TabsList
             variant="line"
-            className="h-8 max-w-full justify-start gap-0 overflow-x-auto overflow-y-hidden rounded-none p-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="h-8 max-w-full justify-start gap-0 overflow-x-auto overflow-y-hidden rounded-none p-0 scrollbar-none [&::-webkit-scrollbar]:hidden"
           >
             {VIEW_TABS.map((tab) => (
               <TabsTrigger
