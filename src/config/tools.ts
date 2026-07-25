@@ -1,5 +1,16 @@
 import type { LucideIcon } from 'lucide-react';
-import { AudioWaveform, Crop, FileCode2, FileText, Image, ImagePlus, Palette, Pencil, Terminal } from 'lucide-react';
+import {
+  AudioWaveform,
+  Crop,
+  FileCode2,
+  FileText,
+  Globe,
+  Image,
+  ImagePlus,
+  Palette,
+  Pencil,
+  Terminal,
+} from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'Developer' | 'Projects';
 
@@ -70,6 +81,15 @@ export const tools: Tool[] = [
     url: '/base64-image-encoder',
     category: 'Developer',
     icon: ImagePlus,
+    featured: true,
+    badge: 'New',
+  },
+  {
+    title: 'Favicon Generator',
+    description: 'Generate favicon sizes and HTML snippets from any image',
+    url: '/favicon-generator',
+    category: 'Developer',
+    icon: Globe,
     featured: true,
     badge: 'New',
   },

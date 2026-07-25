@@ -21,7 +21,8 @@ export default function AppLayout() {
     pathname === '/tailwind-shade-generator' ||
     pathname === '/markdown-live-preview' ||
     pathname === '/placeholder-generator' ||
-    pathname === '/base64-image-encoder';
+    pathname === '/base64-image-encoder' ||
+    pathname === '/favicon-generator';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
