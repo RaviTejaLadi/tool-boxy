@@ -16,7 +16,8 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
-import { toolCategories, toolsByCategory } from '@/config/tools';
+import { toolCategories, tools, toolsByCategory } from '@/config/tools';
+import { useToolFavorites } from '@/hooks/use-tool-favorites';
 
 const navTitle = (title: string) => (title === 'Tailwind Shade Generator' ? 'Tailwind Shades' : title);
 
@@ -24,8 +25,31 @@ export type AppSidebarProps = ComponentProps<typeof Sidebar>;
 
 export function AppSidebar(props: AppSidebarProps) {
   const [query, setQuery] = useState('');
+  const { favorites, isFavorite, toggleFavorite } = useToolFavorites();
 
   const normalizedQuery = query.trim().toLowerCase();
+
+  const favoriteItems = useMemo(() => {
+    return favorites
+      .map((url) => tools.find((tool) => tool.url === url))
+      .filter((tool): tool is (typeof tools)[number] => Boolean(tool))
+      .filter((tool) => {
+        if (!normalizedQuery) return true;
+        return (
+          tool.title.toLowerCase().includes(normalizedQuery) ||
+          tool.description.toLowerCase().includes(normalizedQuery) ||
+          tool.category.toLowerCase().includes(normalizedQuery)
+        );
+      })
+      .map((tool) => {
+        const Icon = tool.icon;
+        return {
+          title: navTitle(tool.title),
+          url: tool.url,
+          icon: <Icon />,
+        };
+      });
+  }, [favorites, normalizedQuery]);
 
   const filteredByCategory = useMemo(() => {
     return toolCategories.map((category) => {
@@ -51,7 +75,7 @@ export function AppSidebar(props: AppSidebarProps) {
     });
   }, [normalizedQuery]);
 
-  const hasResults = filteredByCategory.some((group) => group.items.length > 0);
+  const hasResults = favoriteItems.length > 0 || filteredByCategory.some((group) => group.items.length > 0);
 
   return (
     <Sidebar collapsible="icon" {...props}>
@@ -84,7 +108,23 @@ export function AppSidebar(props: AppSidebarProps) {
         </SidebarGroup>
 
         {hasResults ? (
-          filteredByCategory.map(({ category, items }) => <NavMain key={category} label={category} items={items} />)
+          <>
+            <NavMain
+              label="Favorites"
+              items={favoriteItems}
+              isFavorite={isFavorite}
+              onToggleFavorite={toggleFavorite}
+            />
+            {filteredByCategory.map(({ category, items }) => (
+              <NavMain
+                key={category}
+                label={category}
+                items={items}
+                isFavorite={isFavorite}
+                onToggleFavorite={toggleFavorite}
+              />
+            ))}
+          </>
         ) : (
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">
             <SidebarGroupContent>
