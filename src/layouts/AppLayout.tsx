@@ -23,7 +23,8 @@ export default function AppLayout() {
     pathname === '/placeholder-generator' ||
     pathname === '/base64-image-encoder' ||
     pathname === '/favicon-generator' ||
-    pathname === '/image-converter';
+    pathname === '/image-converter' ||
+    pathname === '/image-splitter';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
