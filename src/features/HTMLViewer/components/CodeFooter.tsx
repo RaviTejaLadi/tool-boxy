@@ -1,7 +1,6 @@
 import { useRef } from 'react';
-import { Copy, Download, Share2, Upload } from 'lucide-react';
+import { Copy, Share2, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { downloadText } from '../helpers';
 import { useViewerStore } from '../stores';
 
 export function CodeFooter() {
@@ -22,11 +21,6 @@ export function CodeFooter() {
   const handleCopy = async () => {
     if (!htmlCode) return;
     await navigator.clipboard.writeText(htmlCode);
-  };
-
-  const handleDownload = () => {
-    if (!htmlCode.trim()) return;
-    downloadText(htmlCode, 'preview.html', 'text/html');
   };
 
   const handleShare = async () => {
@@ -59,10 +53,6 @@ export function CodeFooter() {
         <Button variant="outline" size="sm" onClick={handleCopy} disabled={!htmlCode}>
           <Copy data-icon="inline-start" />
           Copy
-        </Button>
-        <Button variant="outline" size="sm" onClick={handleDownload} disabled={!htmlCode.trim()}>
-          <Download data-icon="inline-start" />
-          Download
         </Button>
         <Button variant="outline" size="sm" onClick={handleShare} disabled={!htmlCode.trim()}>
           <Share2 data-icon="inline-start" />
