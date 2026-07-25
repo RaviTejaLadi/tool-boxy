@@ -25,7 +25,8 @@ export default function AppLayout() {
     pathname === '/favicon-generator' ||
     pathname === '/image-converter' ||
     pathname === '/image-splitter' ||
-    pathname === '/base-converter';
+    pathname === '/base-converter' ||
+    pathname === '/unit-converter';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>

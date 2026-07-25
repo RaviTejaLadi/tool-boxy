@@ -14,6 +14,7 @@ import FaviconGeneratorPage from './pages/FaviconGeneratorPage';
 import ImageConverterPage from './pages/ImageConverterPage';
 import ImageSplitterPage from './pages/ImageSplitterPage';
 import BaseConverterPage from './pages/BaseConverterPage';
+import UnitConverterPage from './pages/UnitConverterPage';
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
       { path: 'image-converter', Component: ImageConverterPage },
       { path: 'image-splitter', Component: ImageSplitterPage },
       { path: 'base-converter', Component: BaseConverterPage },
+      { path: 'unit-converter', Component: UnitConverterPage },
     ],
   },
 ]);

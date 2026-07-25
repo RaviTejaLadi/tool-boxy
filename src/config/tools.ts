@@ -12,6 +12,7 @@ import {
   Images,
   Palette,
   Pencil,
+  Ruler,
 } from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'Developer' | 'Projects';
@@ -119,6 +120,15 @@ export const tools: Tool[] = [
     url: '/base-converter',
     category: 'Developer',
     icon: Binary,
+    featured: true,
+    badge: 'New',
+  },
+  {
+    title: 'Unit Converter',
+    description: 'Convert between length, weight, area, data, temperature, and more',
+    url: '/unit-converter',
+    category: 'Developer',
+    icon: Ruler,
     featured: true,
     badge: 'New',
   },
