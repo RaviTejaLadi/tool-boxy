@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-react';
-import { AudioWaveform, Crop, FileCode2, FileText, Image, Palette, Pencil, Terminal } from 'lucide-react';
+import { AudioWaveform, Crop, FileCode2, FileText, Image, ImagePlus, Palette, Pencil, Terminal } from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'Developer' | 'Projects';
 
@@ -61,6 +61,15 @@ export const tools: Tool[] = [
     url: '/placeholder-generator',
     category: 'Developer',
     icon: Image,
+    featured: true,
+    badge: 'New',
+  },
+  {
+    title: 'Base64 Image Encoder',
+    description: 'Convert images to Base64 strings for CSS/HTML embedding',
+    url: '/base64-image-encoder',
+    category: 'Developer',
+    icon: ImagePlus,
     featured: true,
     badge: 'New',
   },
