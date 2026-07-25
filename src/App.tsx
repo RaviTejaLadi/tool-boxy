@@ -17,6 +17,7 @@ import BaseConverterPage from './pages/BaseConverterPage';
 import UnitConverterPage from './pages/UnitConverterPage';
 import PDFViewerPage from './pages/PDFViewerPage';
 import SVGViewerPage from './pages/SVGViewerPage';
+import JSONViewerPage from './pages/JSONViewerPage';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,7 @@ const router = createBrowserRouter([
       { path: 'unit-converter', Component: UnitConverterPage },
       { path: 'pdf-viewer', Component: PDFViewerPage },
       { path: 'svg-viewer', Component: SVGViewerPage },
+      { path: 'json-viewer', Component: JSONViewerPage },
     ],
   },
 ]);

@@ -28,7 +28,8 @@ export default function AppLayout() {
     pathname === '/base-converter' ||
     pathname === '/unit-converter' ||
     pathname === '/pdf-viewer' ||
-    pathname === '/svg-viewer';
+    pathname === '/svg-viewer' ||
+    pathname === '/json-viewer';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
