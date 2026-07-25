@@ -3,65 +3,33 @@ import { ArrowUpRight } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { toolCategories, tools, toolsByCategory, type Tool } from '@/config/tools';
-// import { cn } from '@/lib/utils';
 
-// function ToolCard({ tool, featured = false }: { tool: Tool; featured?: boolean }) {
-//   const Icon = tool.icon;
-
-//   return (
-//     <Link
-//       to={tool.url}
-//       className={cn(
-//         'group relative flex flex-col gap-3 border border-border bg-card/60 p-4 transition-colors',
-//         'hover:border-primary/40 hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
-//         featured && 'min-h-36 justify-between'
-//       )}
-//     >
-//       <div className="flex items-start justify-between gap-3">
-//         <div className="flex size-8 shrink-0 items-center justify-center bg-primary text-primary-foreground">
-//           <Icon className="size-4" />
-//         </div>
-//         <ArrowUpRight className="size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
-//       </div>
-
-//       <div className="flex flex-col gap-1.5">
-//         <div className="flex flex-wrap items-center gap-2">
-//           <span className="font-heading text-sm font-semibold tracking-tight">{tool.title}</span>
-//           {tool.badge ? (
-//             <Badge variant="secondary" className="h-4 px-1.5 text-[10px] uppercase tracking-wide">
-//               {tool.badge}
-//             </Badge>
-//           ) : null}
-//         </div>
-//         <p className="text-xs leading-relaxed text-muted-foreground">{tool.description}</p>
-//       </div>
-//     </Link>
-//   );
-// }
-
-function ToolRow({ tool }: { tool: Tool }) {
+function ToolCard({ tool }: { tool: Tool }) {
   const Icon = tool.icon;
 
   return (
     <Link
       to={tool.url}
-      className="group flex items-start gap-3 border-b border-border/70 py-3 transition-colors last:border-b-0 hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group relative flex gap-2.5 rounded-md border border-border bg-card/60 p-3 transition-colors hover:border-primary/40 hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
-      <div className="mt-0.5 flex size-7 shrink-0 items-center justify-center bg-secondary text-secondary-foreground">
+      <div className="flex size-7 shrink-0 items-center justify-center rounded bg-primary text-primary-foreground">
         <Icon className="size-3.5" />
       </div>
+
       <div className="min-w-0 flex-1">
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="font-heading text-sm font-medium tracking-tight group-hover:text-primary">{tool.title}</span>
+        <div className="flex items-center gap-1.5">
+          <span className="truncate font-heading text-sm font-medium tracking-tight group-hover:text-primary">
+            {tool.title}
+          </span>
           {tool.badge ? (
-            <Badge variant="outline" className="h-4 px-1.5 text-[10px] uppercase tracking-wide">
+            <Badge variant="secondary" className="h-4 shrink-0 px-1.5 text-[10px] uppercase tracking-wide">
               {tool.badge}
             </Badge>
           ) : null}
+          <ArrowUpRight className="ml-auto size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
         </div>
-        <p className="mt-0.5 text-xs text-muted-foreground">{tool.description}</p>
+        <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-muted-foreground">{tool.description}</p>
       </div>
-      <ArrowUpRight className="mt-1 size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
     </Link>
   );
 }
@@ -120,9 +88,9 @@ export default function Home() {
                     {categoryTools.length}
                   </span>
                 </div>
-                <div className="flex flex-col">
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {categoryTools.map((tool) => (
-                    <ToolRow key={tool.url} tool={tool} />
+                    <ToolCard key={tool.url} tool={tool} />
                   ))}
                 </div>
               </div>
