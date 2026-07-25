@@ -3,7 +3,6 @@ import {
   AudioWaveform,
   Binary,
   CodeXml,
-  Crop,
   FileCode2,
   FileJson,
   FileText,
@@ -18,7 +17,7 @@ import {
   Ruler,
 } from 'lucide-react';
 
-export type ToolCategory = 'Colour' | 'Image' | 'Text' | 'Converters' | 'Projects';
+export type ToolCategory = 'Colour' | 'Image' | 'Text' | 'Converters';
 
 export type Tool = {
   title: string;
@@ -162,16 +161,9 @@ export const tools: Tool[] = [
     featured: true,
     badge: 'New',
   },
-  {
-    title: 'Design Engineering',
-    description: 'Design system experiments and prototypes',
-    url: '/projects/design',
-    category: 'Projects',
-    icon: Crop,
-  },
 ];
 
-export const toolCategories: ToolCategory[] = ['Colour', 'Image', 'Text', 'Converters', 'Projects'];
+export const toolCategories: ToolCategory[] = ['Colour', 'Image', 'Text', 'Converters'];
 
 export const featuredTools = tools.filter((tool) => tool.featured);
 

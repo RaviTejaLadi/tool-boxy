@@ -7,10 +7,7 @@ import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/s
 import { AppSidebar } from '@/layouts/AppSidebar';
 import { cn } from '@/lib/utils';
 
-const quickRoutes = [
-  { label: 'Home', to: '/' },
-  { label: 'Design', to: '/projects/design' },
-] as const;
+const quickRoutes = [{ label: 'Home', to: '/' }] as const;
 
 export default function AppLayout() {
   const { pathname } = useLocation();
