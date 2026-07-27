@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge';
+// import { Badge } from '@/components/ui/badge';
 import { toolCategories, tools, toolsByCategory, type Tool } from '@/config/tools';
 
 function ToolCard({ tool }: { tool: Tool }) {
@@ -21,11 +21,11 @@ function ToolCard({ tool }: { tool: Tool }) {
           <span className="truncate font-heading text-sm font-medium tracking-tight group-hover:text-primary">
             {tool.title}
           </span>
-          {tool.badge ? (
+          {/* {tool.badge ? (
             <Badge variant="secondary" className="h-4 shrink-0 px-1.5 text-[10px] uppercase tracking-wide">
               {tool.badge}
             </Badge>
-          ) : null}
+          ) : null} */}
           <ArrowUpRight className="ml-auto size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
         </div>
         <p className="mt-0.5 line-clamp-2 text-xs leading-snug text-muted-foreground">{tool.description}</p>
