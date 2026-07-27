@@ -39,6 +39,7 @@ export default function AppLayout() {
     pathname === '/favicon-generator' ||
     pathname === '/image-converter' ||
     pathname === '/image-splitter' ||
+    pathname === '/image-stitcher' ||
     pathname === '/base-converter' ||
     pathname === '/unit-converter' ||
     pathname === '/pdf-viewer' ||
