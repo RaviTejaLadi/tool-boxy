@@ -18,6 +18,12 @@ import PDFViewerPage from './pages/PDFViewerPage';
 import SVGViewerPage from './pages/SVGViewerPage';
 import JSONViewerPage from './pages/JSONViewerPage';
 import HTMLViewerPage from './pages/HTMLViewerPage';
+import JWTDecoderPage from './pages/JWTDecoderPage';
+import UUIDGeneratorPage from './pages/UUIDGeneratorPage';
+import PasswordGeneratorPage from './pages/PasswordGeneratorPage';
+import LoremIpsumGeneratorPage from './pages/LoremIpsumGeneratorPage';
+import QRCodeGeneratorPage from './pages/QRCodeGeneratorPage';
+import ASCIIArtGeneratorPage from './pages/ASCIIArtGeneratorPage';
 
 const router = createBrowserRouter([
   {
@@ -41,6 +47,12 @@ const router = createBrowserRouter([
       { path: 'svg-viewer', Component: SVGViewerPage },
       { path: 'json-viewer', Component: JSONViewerPage },
       { path: 'html-viewer', Component: HTMLViewerPage },
+      { path: 'jwt-decoder', Component: JWTDecoderPage },
+      { path: 'uuid-generator', Component: UUIDGeneratorPage },
+      { path: 'password-generator', Component: PasswordGeneratorPage },
+      { path: 'lorem-ipsum-generator', Component: LoremIpsumGeneratorPage },
+      { path: 'qr-code-generator', Component: QRCodeGeneratorPage },
+      { path: 'ascii-rt-generator', Component: ASCIIArtGeneratorPage },
     ],
   },
 ]);

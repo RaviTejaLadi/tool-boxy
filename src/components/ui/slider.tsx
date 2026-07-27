@@ -3,7 +3,15 @@ import { Slider as SliderPrimitive } from '@base-ui/react/slider';
 import { cn } from '@/lib/utils';
 
 function Slider({ className, defaultValue, value, min = 0, max = 100, ...props }: SliderPrimitive.Root.Props) {
-  const _values = Array.isArray(value) ? value : Array.isArray(defaultValue) ? defaultValue : [min, max];
+  const _values = Array.isArray(value)
+    ? value
+    : typeof value === 'number'
+    ? [value]
+    : Array.isArray(defaultValue)
+    ? defaultValue
+    : typeof defaultValue === 'number'
+    ? [defaultValue]
+    : [min];
 
   return (
     <SliderPrimitive.Root
@@ -13,7 +21,7 @@ function Slider({ className, defaultValue, value, min = 0, max = 100, ...props }
       value={value}
       min={min}
       max={max}
-      thumbAlignment="edge"
+      thumbAlignment="center"
       {...props}
     >
       <SliderPrimitive.Control className="relative flex w-full touch-none items-center select-none data-disabled:opacity-50 data-vertical:h-full data-vertical:min-h-40 data-vertical:w-auto data-vertical:flex-col">

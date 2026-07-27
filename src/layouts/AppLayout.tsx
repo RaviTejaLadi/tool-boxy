@@ -44,7 +44,13 @@ export default function AppLayout() {
     pathname === '/pdf-viewer' ||
     pathname === '/svg-viewer' ||
     pathname === '/json-viewer' ||
-    pathname === '/html-viewer';
+    pathname === '/html-viewer' ||
+    pathname === '/jwt-decoder' ||
+    pathname === '/uuid-generator' ||
+    pathname === '/password-generator' ||
+    pathname === '/lorem-ipsum-generator' ||
+    pathname === '/qr-code-generator' ||
+    pathname === '/ascii-rt-generator';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>

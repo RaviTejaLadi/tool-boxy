@@ -1,0 +1,1 @@
+export { downloadQrAsPng } from './downloadQr';
