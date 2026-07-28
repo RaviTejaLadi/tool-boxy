@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import { RouteErrorBoundary } from './components/ErrorBoundary';
 import AppLayout from './layouts/AppLayout';
 import CodeSnippetPage from './pages/CodeSnippetPage';
 import Home from './pages/Home';
@@ -25,11 +26,16 @@ import PasswordGeneratorPage from './pages/PasswordGeneratorPage';
 import LoremIpsumGeneratorPage from './pages/LoremIpsumGeneratorPage';
 import QRCodeGeneratorPage from './pages/QRCodeGeneratorPage';
 import ASCIIArtGeneratorPage from './pages/ASCIIArtGeneratorPage';
+import WordCounterPage from './pages/WordCounterPage';
+import TypographyCalculatorPage from './pages/TypographyCalculatorPage';
+import WorldScriptsPage from './pages/WorldScriptsPage';
+import GlyphBrowserPage from './pages/GlyphBrowserPage';
 
 const router = createBrowserRouter([
   {
     path: '/',
     Component: AppLayout,
+    errorElement: <RouteErrorBoundary />,
     children: [
       { index: true, Component: Home },
       { path: 'code-snippet', Component: CodeSnippetPage },
@@ -54,7 +60,11 @@ const router = createBrowserRouter([
       { path: 'password-generator', Component: PasswordGeneratorPage },
       { path: 'lorem-ipsum-generator', Component: LoremIpsumGeneratorPage },
       { path: 'qr-code-generator', Component: QRCodeGeneratorPage },
-      { path: 'ascii-rt-generator', Component: ASCIIArtGeneratorPage },
+      { path: 'ascii-art-generator', Component: ASCIIArtGeneratorPage },
+      { path: 'word-counter', Component: WordCounterPage },
+      { path: 'typography-calculator', Component: TypographyCalculatorPage },
+      { path: 'world-scripts', Component: WorldScriptsPage },
+      { path: 'glyph-browser', Component: GlyphBrowserPage },
     ],
   },
 ]);

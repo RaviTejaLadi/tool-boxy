@@ -1,6 +1,7 @@
 import { Home } from 'lucide-react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ModeToggle } from '@/components/theme/mode-toggle';
 import { buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -51,7 +52,11 @@ export default function AppLayout() {
     pathname === '/password-generator' ||
     pathname === '/lorem-ipsum-generator' ||
     pathname === '/qr-code-generator' ||
-    pathname === '/ascii-rt-generator';
+    pathname === '/ascii-art-generator' ||
+    pathname === '/word-counter' ||
+    pathname === '/typography-calculator' ||
+    pathname === '/world-scripts' ||
+    pathname === '/glyph-browser';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
@@ -89,7 +94,9 @@ export default function AppLayout() {
           </div>
         </header>
         <div className={cn('flex flex-1 flex-col', isFullBleed ? 'min-h-0 overflow-hidden' : 'gap-4 p-4 pt-0')}>
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
         </div>
       </SidebarInset>
     </SidebarProvider>
