@@ -1,7 +1,10 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react';
-import { isRouteErrorResponse, useNavigate, useRouteError } from 'react-router-dom';
+import { TriangleAlert } from 'lucide-react';
+import { isRouteErrorResponse, Link, useNavigate, useRouteError } from 'react-router-dom';
 
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty';
 import { cn } from '@/lib/utils';
 
 function normalizeError(error: unknown): Error {
@@ -10,59 +13,115 @@ function normalizeError(error: unknown): Error {
   }
 
   if (isRouteErrorResponse(error)) {
-    const detail = typeof error.data === 'string' ? error.data : error.data != null ? JSON.stringify(error.data) : '';
-    const message = detail ? `${error.status} ${error.statusText}: ${detail}` : `${error.status} ${error.statusText}`;
-    return new Error(message);
+    const detail =
+      typeof error.data === 'string'
+        ? error.data
+        : error.data != null
+          ? JSON.stringify(error.data)
+          : error.statusText;
+    return new Error(detail || `${error.status} ${error.statusText}`);
   }
 
   return new Error(String(error));
 }
 
+type ErrorPresentation = {
+  title: string;
+  description: string;
+  detail: string;
+};
+
+function getErrorPresentation(error: unknown): ErrorPresentation {
+  if (isRouteErrorResponse(error)) {
+    if (error.status === 404) {
+      return {
+        title: 'Page not found',
+        description: "We couldn't find a tool at this address. Check the URL or choose a tool from home.",
+        detail:
+          typeof error.data === 'string'
+            ? error.data
+            : 'The requested path is not registered in this app.',
+      };
+    }
+
+    const detail =
+      typeof error.data === 'string'
+        ? error.data
+        : error.data != null
+          ? JSON.stringify(error.data)
+          : error.statusText;
+
+    return {
+      title: 'Something went wrong',
+      description: `The server returned ${error.status} ${error.statusText}.`,
+      detail,
+    };
+  }
+
+  const normalized = normalizeError(error);
+
+  return {
+    title: 'Something went wrong',
+    description: 'An unexpected error occurred while loading this page.',
+    detail: normalized.message,
+  };
+}
+
 type ErrorFallbackProps = {
   error: Error;
   errorInfo?: ErrorInfo | null;
+  title?: string;
+  description?: string;
+  detail?: string;
   onReset?: () => void;
   className?: string;
 };
 
-export function ErrorFallback({ error, errorInfo, onReset, className }: ErrorFallbackProps) {
+export function ErrorFallback({
+  error,
+  errorInfo,
+  title = 'Something went wrong',
+  description = 'An unexpected error occurred while loading this page.',
+  detail,
+  onReset,
+  className,
+}: ErrorFallbackProps) {
+  const message = detail ?? error.message ?? 'Unknown error occurred';
+
   return (
-    <div
-      className={cn(
-        'mx-auto flex w-full max-w-2xl flex-col gap-4 rounded-xl border border-destructive/40 bg-destructive/10 p-6 text-foreground shadow-sm',
-        className
-      )}
-      role="alert"
-    >
-      <div className="flex items-center gap-3">
-        <span className="text-2xl" aria-hidden>
-          🚨
-        </span>
-        <h2 className="text-xl font-bold text-destructive">Something went wrong</h2>
-      </div>
+    <Empty className={cn('relative mx-auto w-full max-w-md px-0', className)}>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <TriangleAlert className="text-destructive" aria-hidden />
+        </EmptyMedia>
+        <EmptyTitle>{title}</EmptyTitle>
+        <EmptyDescription>{description}</EmptyDescription>
+      </EmptyHeader>
 
-      <div>
-        <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Error message</p>
-        <div className="overflow-x-auto rounded-lg border border-destructive/30 bg-background/80 p-3 font-mono text-sm">
-          {error.message || 'Unknown error occurred'}
-        </div>
-      </div>
-
-      {errorInfo?.componentStack ? (
-        <div>
-          <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Component stack</p>
-          <pre className="max-h-48 overflow-auto rounded-lg border border-border bg-muted p-3 font-mono text-xs leading-relaxed text-muted-foreground">
-            {errorInfo.componentStack.trim()}
-          </pre>
-        </div>
-      ) : null}
-
-      {onReset ? (
-        <Button type="button" variant="destructive" size="sm" className="w-fit" onClick={onReset}>
-          Try again
-        </Button>
-      ) : null}
-    </div>
+      <Card className="w-full text-left ring-foreground/10">
+        <CardHeader className="border-b pb-(--card-spacing)">
+          <CardTitle className="text-xs font-normal text-muted-foreground">Details</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="font-mono text-xs leading-relaxed text-foreground/90 wrap-break-word">{message}</p>
+          {errorInfo?.componentStack ? (
+            <pre className="mt-3 max-h-40 overflow-auto border-t border-border pt-3 font-mono text-[11px] leading-relaxed text-muted-foreground">
+              {errorInfo.componentStack.trim()}
+            </pre>
+          ) : null}
+        </CardContent>
+        {onReset ? (
+          <CardFooter className="gap-2 border-t">
+            <Button type="button" size="sm" onClick={onReset}>
+              Try again
+            </Button>
+            <Link to="/" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
+              Go home
+            </Link>
+          </CardFooter>
+        ) : null}
+      </Card>
+    </Empty>
   );
 }
 
@@ -114,11 +173,15 @@ export class ErrorBoundary extends Component<Props, State> {
         return this.props.fallback;
       }
 
+      const error = this.state.error ?? new Error('Unknown error occurred');
+
       return (
         <ErrorFallback
-          className="my-4 min-h-[min(24rem,50vh)] flex-1 justify-center"
-          error={this.state.error ?? new Error('Unknown error occurred')}
+          className="my-4 min-h-[min(20rem,45vh)] flex-1"
+          error={error}
           errorInfo={this.state.errorInfo}
+          description="This tool hit an error. You can retry or switch to another page from the sidebar."
+          detail={error.message}
           onReset={this.handleReset}
         />
       );
@@ -128,14 +191,32 @@ export class ErrorBoundary extends Component<Props, State> {
   }
 }
 
+function ErrorPageBackdrop() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(ellipse_at_top,oklch(0.88_0.06_230_/0.55),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_top,oklch(0.35_0.06_240_/0.45),transparent_70%)]"
+    />
+  );
+}
+
 export function RouteErrorBoundary() {
   const routeError = useRouteError();
   const navigate = useNavigate();
+  const presentation = getErrorPresentation(routeError);
   const error = normalizeError(routeError);
 
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center bg-background p-6">
-      <ErrorFallback error={error} onReset={() => navigate(0)} />
+    <div className="relative flex min-h-svh flex-col items-center justify-center bg-background p-6">
+      <ErrorPageBackdrop />
+      <ErrorFallback
+        className="relative z-10"
+        error={error}
+        title={presentation.title}
+        description={presentation.description}
+        detail={presentation.detail}
+        onReset={() => navigate(0)}
+      />
     </div>
   );
 }
