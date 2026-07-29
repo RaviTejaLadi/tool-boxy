@@ -1,0 +1,11 @@
+import GradientGenerator from '@/features/GradientGenerator';
+
+const GradientGeneratorPage = () => {
+  return (
+    <div className="flex h-full min-h-0 flex-1 flex-col">
+      <GradientGenerator />
+    </div>
+  );
+};
+
+export default GradientGeneratorPage;

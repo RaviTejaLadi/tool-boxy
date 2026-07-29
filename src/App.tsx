@@ -30,6 +30,12 @@ import WordCounterPage from './pages/WordCounterPage';
 import TypographyCalculatorPage from './pages/TypographyCalculatorPage';
 import WorldScriptsPage from './pages/WorldScriptsPage';
 import GlyphBrowserPage from './pages/GlyphBrowserPage';
+import ColourConverterPage from './pages/ColourConverterPage';
+import ContrastCheckerPage from './pages/ContrastCheckerPage';
+import GradientGeneratorPage from './pages/GradientGeneratorPage';
+import MetaTagGeneratorPage from './pages/MetaTagGeneratorPage';
+import BorderRadiusGeneratorPage from './pages/BorderRadiusGeneratorPage';
+import GlassmorphismGeneratorPage from './pages/GlassmorphismGeneratorPage';
 
 const router = createBrowserRouter([
   {
@@ -65,6 +71,12 @@ const router = createBrowserRouter([
       { path: 'typography-calculator', Component: TypographyCalculatorPage },
       { path: 'world-scripts', Component: WorldScriptsPage },
       { path: 'glyph-browser', Component: GlyphBrowserPage },
+      { path: 'colour-converter', Component: ColourConverterPage },
+      { path: 'contrast-checker', Component: ContrastCheckerPage },
+      { path: 'gradient-generator', Component: GradientGeneratorPage },
+      { path: 'meta-tag-generator', Component: MetaTagGeneratorPage },
+      { path: 'border-radius-generator', Component: BorderRadiusGeneratorPage },
+      { path: 'glassmorphism-generator', Component: GlassmorphismGeneratorPage },
     ],
   },
 ]);

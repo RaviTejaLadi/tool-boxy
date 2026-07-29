@@ -115,15 +115,17 @@ export function AppSidebar(props: AppSidebarProps) {
               isFavorite={isFavorite}
               onToggleFavorite={toggleFavorite}
             />
-            {filteredByCategory.map(({ category, items }) => (
-              <NavMain
-                key={category}
-                label={category}
-                items={items}
-                isFavorite={isFavorite}
-                onToggleFavorite={toggleFavorite}
-              />
-            ))}
+            {filteredByCategory
+              .filter(({ items }) => items.length > 0)
+              .map(({ category, items }) => (
+                <NavMain
+                  key={category}
+                  label={category}
+                  items={items}
+                  isFavorite={isFavorite}
+                  onToggleFavorite={toggleFavorite}
+                />
+              ))}
           </>
         ) : (
           <SidebarGroup className="group-data-[collapsible=icon]:hidden">

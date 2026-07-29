@@ -28,7 +28,7 @@ export function selectFilteredGlyphs(state: Pick<GlyphBrowserState, 'blockId' | 
 export const useGlyphBrowserStore = create<GlyphBrowserState>((set, get) => ({
   blockId: DEFAULT_BLOCK_ID,
   query: '',
-  cellSize: 'comfortable',
+  cellSize: 'compact',
 
   setBlockId: (blockId) => set({ blockId, query: '' }),
 

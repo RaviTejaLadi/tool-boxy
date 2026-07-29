@@ -14,11 +14,7 @@ function normalizeError(error: unknown): Error {
 
   if (isRouteErrorResponse(error)) {
     const detail =
-      typeof error.data === 'string'
-        ? error.data
-        : error.data != null
-          ? JSON.stringify(error.data)
-          : error.statusText;
+      typeof error.data === 'string' ? error.data : error.data != null ? JSON.stringify(error.data) : error.statusText;
     return new Error(detail || `${error.status} ${error.statusText}`);
   }
 
@@ -37,19 +33,12 @@ function getErrorPresentation(error: unknown): ErrorPresentation {
       return {
         title: 'Page not found',
         description: "We couldn't find a tool at this address. Check the URL or choose a tool from home.",
-        detail:
-          typeof error.data === 'string'
-            ? error.data
-            : 'The requested path is not registered in this app.',
+        detail: typeof error.data === 'string' ? error.data : 'The requested path is not registered in this app.',
       };
     }
 
     const detail =
-      typeof error.data === 'string'
-        ? error.data
-        : error.data != null
-          ? JSON.stringify(error.data)
-          : error.statusText;
+      typeof error.data === 'string' ? error.data : error.data != null ? JSON.stringify(error.data) : error.statusText;
 
     return {
       title: 'Something went wrong',

@@ -56,7 +56,13 @@ export default function AppLayout() {
     pathname === '/word-counter' ||
     pathname === '/typography-calculator' ||
     pathname === '/world-scripts' ||
-    pathname === '/glyph-browser';
+    pathname === '/glyph-browser' ||
+    pathname === '/colour-converter' ||
+    pathname === '/contrast-checker' ||
+    pathname === '/gradient-generator' ||
+    pathname === '/meta-tag-generator' ||
+    pathname === '/border-radius-generator' ||
+    pathname === '/glassmorphism-generator';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>

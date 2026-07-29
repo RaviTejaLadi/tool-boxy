@@ -79,6 +79,7 @@ export default function Home() {
         <div className="flex flex-col gap-10">
           {toolCategories.map((category) => {
             const categoryTools = toolsByCategory(category);
+            if (categoryTools.length === 0) return null;
 
             return (
               <div key={category} className="flex flex-col gap-3">

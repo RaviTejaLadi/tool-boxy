@@ -44,7 +44,7 @@ export const useWorldScriptsStore = create<WorldScriptsState>((set, get) => ({
   pickerOpen: false,
   ...browseDefaults,
   symbolQuery: '',
-  cellSize: 'comfortable',
+  cellSize: 'compact',
   includeLowercase: false,
   sampleFontSize: 22,
   exportFlash: null,
