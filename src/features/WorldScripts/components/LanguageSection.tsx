@@ -40,7 +40,7 @@ export function LanguageSection() {
           </span>
           <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
         </PopoverTrigger>
-        <PopoverContent className="w-[var(--radix-popover-trigger-width)] rounded-none p-0" align="start">
+        <PopoverContent className="w-[--radix-popover-trigger-width] rounded-none p-0" align="start">
           <Command>
             <CommandInput placeholder="Search any language..." />
             <CommandList>

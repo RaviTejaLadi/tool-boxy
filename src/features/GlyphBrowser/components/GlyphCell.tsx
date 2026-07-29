@@ -67,7 +67,7 @@ export function GlyphCell({ glyph, cellKey, className }: GlyphCellProps) {
               <button
                 key={`${cellKey}-${id}`}
                 type="button"
-                className="flex items-center gap-2 border-border px-3 py-2.5 text-left text-xs font-medium transition-colors hover:bg-muted/60 [&:nth-child(odd)]:border-r [&:nth-child(-n+2)]:border-b"
+                className="flex items-center gap-2 border-border px-3 py-2.5 text-left text-xs font-medium transition-colors hover:bg-muted/60 odd:border-r nth-[-n+2]:border-b"
                 onClick={() => void handleCopy(id, getValue(formats))}
               >
                 {copied ? (

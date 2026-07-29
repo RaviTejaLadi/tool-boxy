@@ -32,19 +32,19 @@ export function StyleSection() {
         >
           <ToggleGroupItem
             value="square"
-            className="flex-1 rounded-none border-0 text-xs data-[pressed]:bg-primary data-[pressed]:text-primary-foreground"
+            className="flex-1 rounded-none border-0 text-xs data-pressed:bg-primary data-pressed:text-primary-foreground"
           >
             Square
           </ToggleGroupItem>
           <ToggleGroupItem
             value="rounded"
-            className="flex-1 rounded-none border-0 text-xs data-[pressed]:bg-primary data-[pressed]:text-primary-foreground"
+            className="flex-1 rounded-none border-0 text-xs data-pressed:bg-primary data-pressed:text-primary-foreground"
           >
             Rounded
           </ToggleGroupItem>
           <ToggleGroupItem
             value="circle"
-            className="flex-1 rounded-none border-0 text-xs data-[pressed]:bg-primary data-[pressed]:text-primary-foreground"
+            className="flex-1 rounded-none border-0 text-xs data-pressed:bg-primary data-pressed:text-primary-foreground"
           >
             Circle
           </ToggleGroupItem>

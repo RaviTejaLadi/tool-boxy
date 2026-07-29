@@ -37,7 +37,7 @@ export function DisplaySection() {
               <ToggleGroupItem
                 key={opt.value}
                 value={opt.value}
-                className="flex-1 rounded-none border-0 data-[pressed]:bg-primary data-[pressed]:text-primary-foreground"
+                className="flex-1 rounded-none border-0 data-pressed:bg-primary data-pressed:text-primary-foreground"
               >
                 {opt.label}
               </ToggleGroupItem>
