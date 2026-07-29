@@ -62,7 +62,8 @@ export default function AppLayout() {
     pathname === '/gradient-generator' ||
     pathname === '/meta-tag-generator' ||
     pathname === '/border-radius-generator' ||
-    pathname === '/glassmorphism-generator';
+    pathname === '/glassmorphism-generator' ||
+    pathname === '/animation-generator';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>

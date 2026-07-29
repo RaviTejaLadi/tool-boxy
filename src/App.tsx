@@ -36,6 +36,7 @@ import GradientGeneratorPage from './pages/GradientGeneratorPage';
 import MetaTagGeneratorPage from './pages/MetaTagGeneratorPage';
 import BorderRadiusGeneratorPage from './pages/BorderRadiusGeneratorPage';
 import GlassmorphismGeneratorPage from './pages/GlassmorphismGeneratorPage';
+import AnimationGeneratorPage from './pages/AnimationGeneratorPage';
 
 const router = createBrowserRouter([
   {
@@ -77,6 +78,7 @@ const router = createBrowserRouter([
       { path: 'meta-tag-generator', Component: MetaTagGeneratorPage },
       { path: 'border-radius-generator', Component: BorderRadiusGeneratorPage },
       { path: 'glassmorphism-generator', Component: GlassmorphismGeneratorPage },
+      { path: 'animation-generator', Component: AnimationGeneratorPage },
     ],
   },
 ]);
