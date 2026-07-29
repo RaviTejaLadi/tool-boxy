@@ -34,6 +34,7 @@ import {
   Blend,
   Square,
   Sparkles,
+  LayoutGrid,
 } from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'CSS' | 'Image' | 'Developer' | 'Text' | 'Converters';
@@ -121,6 +122,15 @@ export const tools: Tool[] = [
     url: '/glassmorphism-generator',
     category: 'CSS',
     icon: Sparkles,
+    featured: true,
+    badge: 'New',
+  },
+  {
+    title: 'Flexbox Playground',
+    description: 'Explore flex container and item properties',
+    url: '/flexbox-playground',
+    category: 'CSS',
+    icon: LayoutGrid,
     featured: true,
     badge: 'New',
   },

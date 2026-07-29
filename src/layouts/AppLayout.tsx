@@ -63,7 +63,8 @@ export default function AppLayout() {
     pathname === '/meta-tag-generator' ||
     pathname === '/border-radius-generator' ||
     pathname === '/glassmorphism-generator' ||
-    pathname === '/animation-generator';
+    pathname === '/animation-generator' ||
+    pathname === '/flexbox-playground';
 
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
