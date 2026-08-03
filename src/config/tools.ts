@@ -126,9 +126,9 @@ export const tools: Tool[] = [
     badge: 'New',
   },
   {
-    title: 'Flexbox Playground',
-    description: 'Explore flex container and item properties',
-    url: '/flexbox-playground',
+    title: 'Flex Patterns',
+    description: '20 real-world flex layouts with copy-ready HTML and CSS',
+    url: '/flex-patterns',
     category: 'CSS',
     icon: LayoutGrid,
     featured: true,

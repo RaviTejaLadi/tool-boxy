@@ -37,7 +37,7 @@ import MetaTagGeneratorPage from './pages/MetaTagGeneratorPage';
 import BorderRadiusGeneratorPage from './pages/BorderRadiusGeneratorPage';
 import GlassmorphismGeneratorPage from './pages/GlassmorphismGeneratorPage';
 import AnimationGeneratorPage from './pages/AnimationGeneratorPage';
-import FlexboxPlaygroundPage from './pages/FlexboxPlaygroundPage';
+import FlexPatternsPage from './pages/FlexPatternsPage';
 
 const router = createBrowserRouter([
   {
@@ -80,7 +80,7 @@ const router = createBrowserRouter([
       { path: 'border-radius-generator', Component: BorderRadiusGeneratorPage },
       { path: 'glassmorphism-generator', Component: GlassmorphismGeneratorPage },
       { path: 'animation-generator', Component: AnimationGeneratorPage },
-      { path: 'flexbox-playground', Component: FlexboxPlaygroundPage },
+      { path: 'flex-patterns', Component: FlexPatternsPage },
     ],
   },
 ]);
