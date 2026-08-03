@@ -1,4 +1,5 @@
 import { ColorPickerSwatch } from '@/components/ColorPickerSwatch';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -249,9 +250,12 @@ export function ControlsSection() {
 
       <section className="space-y-2">
         <SectionHeading className="mb-3">CSS</SectionHeading>
-        <pre className="max-h-32 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] whitespace-pre-wrap break-all">
-          {css}
-        </pre>
+        <SyntaxHighlight
+          code={css}
+          language="css"
+          wrap
+          className="max-h-32 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] break-all"
+        />
       </section>
     </>
   );

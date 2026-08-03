@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, Copy, Download } from 'lucide-react';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Button } from '@/components/ui/button';
 import { buildSvg, buildDataUrl, downloadSvg, copyToClipboard, type PlaceholderConfig } from '../helpers';
 import { SectionHeading } from './SectionHeading';
@@ -32,9 +33,12 @@ export function ExportSection({ config }: { config: PlaceholderConfig }) {
             {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>
-        <pre className="max-h-56 overflow-auto px-3 py-3 font-mono text-[13px] leading-6 break-all whitespace-pre-wrap text-primary">
-          {svg}
-        </pre>
+        <SyntaxHighlight
+          code={svg}
+          language="markup"
+          wrap
+          className="max-h-56 overflow-auto px-3 py-3 font-mono text-[13px] leading-6 break-all text-primary"
+        />
       </div>
 
       <Button

@@ -1,4 +1,5 @@
 import { Input } from '@/components/ui/input';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
@@ -73,9 +74,12 @@ export function FormSection() {
 
       <section className="space-y-2">
         <SectionHeading className="mb-3">Generated output</SectionHeading>
-        <pre className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] whitespace-pre-wrap break-all">
-          {metaTags}
-        </pre>
+        <SyntaxHighlight
+          code={metaTags}
+          language="markup"
+          wrap
+          className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] break-all"
+        />
       </section>
     </>
   );

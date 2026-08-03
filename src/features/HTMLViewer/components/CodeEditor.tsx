@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { EDITOR_FONT_SIZE, EDITOR_GUTTER_BG, EDITOR_LINE_HEIGHT } from '../constants';
 import { useTypingCommit } from '../helpers/useTypingCommit';
 import { useViewerStore } from '../stores';
-import { CodeHighlight } from './CodeHighlight';
+import { EditorCodeHighlight } from '@/components/SyntaxHighlight';
 
 export function CodeEditor() {
   const htmlCode = useViewerStore((s) => s.htmlCode);
@@ -64,7 +64,14 @@ export function CodeEditor() {
         style={{ width: gutterWidth, background: EDITOR_GUTTER_BG, borderRight: '1px solid var(--border)' }}
       />
 
-      <CodeHighlight code={htmlCode} wordWrap={wordWrap} gutterWidth={gutterWidth} layerRef={highlightRef} />
+      <EditorCodeHighlight
+        code={htmlCode}
+        language="markup"
+        wordWrap={wordWrap}
+        gutterWidth={gutterWidth}
+        layerRef={highlightRef}
+        lineKeyPrefix="html-line"
+      />
 
       <textarea
         ref={textareaRef}

@@ -283,6 +283,7 @@
   color: var(--muted-foreground);
 }
 
+.markdown-preview .md-code-body .syntax-highlight-root,
 .markdown-preview .md-code-body pre,
 .markdown-preview .md-code-body code {
   background: transparent !important;

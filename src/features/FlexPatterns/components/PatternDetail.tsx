@@ -45,8 +45,8 @@ export function PatternDetail() {
 
           <section className="space-y-3">
             <p className="font-mono text-[11px] tracking-wide text-primary uppercase">Production code</p>
-            <CodeBlock title="HTML" id={`${pattern.id}-html-block`} code={htmlText} />
-            <CodeBlock title="CSS" id={`${pattern.id}-css-block`} code={cssText} />
+            <CodeBlock title="HTML" id={`${pattern.id}-html-block`} code={htmlText} language="markup" />
+            <CodeBlock title="CSS" id={`${pattern.id}-css-block`} code={cssText} language="css" />
           </section>
         </div>
       </div>

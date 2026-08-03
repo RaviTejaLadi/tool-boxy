@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { buildCssText, buildHtmlText, getIterationValue, getTimingValue } from '../helpers';
 import { useAnimationGeneratorStore } from '../stores';
@@ -42,14 +43,20 @@ export function CodeSection() {
           <TabsTrigger value="html">HTML</TabsTrigger>
         </TabsList>
         <TabsContent value="css" className="mt-2">
-          <pre className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed whitespace-pre-wrap">
-            {cssText}
-          </pre>
+          <SyntaxHighlight
+            code={cssText}
+            language="css"
+            wrap
+            className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed"
+          />
         </TabsContent>
         <TabsContent value="html" className="mt-2">
-          <pre className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed whitespace-pre-wrap">
-            {htmlText}
-          </pre>
+          <SyntaxHighlight
+            code={htmlText}
+            language="markup"
+            wrap
+            className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed"
+          />
         </TabsContent>
       </Tabs>
     </section>

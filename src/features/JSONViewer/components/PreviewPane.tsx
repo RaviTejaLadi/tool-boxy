@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { AlertCircle, Copy, Search } from 'lucide-react';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -109,7 +110,12 @@ export function PreviewPane() {
               ) : viewMode === 'tree' ? (
                 <JsonTree key={String(expanded)} data={filtered} defaultExpanded={expanded} />
               ) : (
-                <pre className="font-mono text-[13px] leading-6 whitespace-pre-wrap text-foreground">{rawText}</pre>
+                <SyntaxHighlight
+                  code={rawText}
+                  language="json"
+                  wrap
+                  className="font-mono text-[13px] leading-6 text-foreground"
+                />
               )}
             </div>
           </ScrollArea>

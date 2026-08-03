@@ -1,4 +1,5 @@
 import { Input } from '@/components/ui/input';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Label } from '@/components/ui/label';
 import { Slider } from '@/components/ui/slider';
 import { Switch } from '@/components/ui/switch';
@@ -181,9 +182,12 @@ export function GlassControlsSection() {
 
       <section className="space-y-2">
         <SectionHeading className="mb-3">CSS output</SectionHeading>
-        <pre className="max-h-40 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] whitespace-pre-wrap">
-          {cssBlock}
-        </pre>
+        <SyntaxHighlight
+          code={cssBlock}
+          language="css"
+          wrap
+          className="max-h-40 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px]"
+        />
       </section>
     </>
   );

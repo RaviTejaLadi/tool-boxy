@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { atomDark, prism } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { AlertTriangle, Check, Copy, ExternalLink, Info, Lightbulb, TriangleAlert } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import MermaidChartLazy from './MermaidChartLazy';
@@ -318,18 +317,12 @@ export function buildMarkdownComponents({
             </Button>
           </div>
           <div className="md-code-body overflow-x-auto">
-            <SyntaxHighlighter
-              style={isDarkTheme ? atomDark : prism}
+            <SyntaxHighlight
+              code={codeString}
               language={language}
-              PreTag="div"
-              className="m-0! bg-transparent! p-4! text-[0.875rem] leading-[1.65]!"
+              className="p-4 text-[0.875rem] leading-[1.65]"
               showLineNumbers={false}
-              customStyle={{ background: 'transparent', margin: 0 }}
-              codeTagProps={{ style: { background: 'transparent' } }}
-              {...props}
-            >
-              {codeString}
-            </SyntaxHighlighter>
+            />
           </div>
         </div>
       ) : (

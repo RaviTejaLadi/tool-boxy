@@ -1,0 +1,27 @@
+.syntax-highlight-root {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+}
+
+.syntax-highlight-root .syntax-highlight-pre,
+.syntax-highlight-root .syntax-highlight-code {
+  font: inherit;
+  letter-spacing: inherit;
+}
+
+.syntax-highlight-root .syntax-highlight-pre {
+  background: transparent !important;
+}
+
+.syntax-highlight-root .syntax-highlight-code,
+.syntax-highlight-root .syntax-highlight-code span {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-family: inherit !important;
+  text-shadow: none !important;
+}
+
+.syntax-highlight-panel .syntax-highlight-root,
+.syntax-highlight-panel .syntax-highlight-root .syntax-highlight-pre,
+.syntax-highlight-panel .syntax-highlight-root .syntax-highlight-code {
+  min-height: 100%;
+}

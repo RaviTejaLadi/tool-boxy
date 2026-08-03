@@ -21,7 +21,7 @@ export function ExportSection() {
       <div className="flex flex-col gap-4">
         <CodeBlock title="CSS Variables" id="css-hex" code={cssVarsHex} />
         <CodeBlock title="CSS Variables (OKLCH)" id="css-oklch" code={cssVarsOklch} />
-        <CodeBlock title="Tailwind Config" id="tw-config" code={tailwindConfig} />
+        <CodeBlock title="Tailwind Config" id="tw-config" code={tailwindConfig} language="javascript" />
       </div>
     </div>
   );

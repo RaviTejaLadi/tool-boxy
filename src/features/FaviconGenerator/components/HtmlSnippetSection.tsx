@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, Copy } from 'lucide-react';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Button } from '@/components/ui/button';
 import { buildHtmlSnippet, copyToClipboard } from '../helpers';
 import { useFaviconStore } from '../stores';
@@ -44,9 +45,12 @@ export function HtmlSnippetSection() {
             {copied ? 'Copied' : 'Copy'}
           </Button>
         </div>
-        <pre className="max-h-56 overflow-auto px-3 py-3 font-mono text-[12px] leading-5 break-all whitespace-pre-wrap text-primary">
-          {snippet}
-        </pre>
+        <SyntaxHighlight
+          code={snippet}
+          language="markup"
+          wrap
+          className="max-h-56 overflow-auto px-3 py-3 font-mono text-[12px] leading-5 break-all text-primary"
+        />
       </div>
 
       <Button type="button" variant="outline" className="w-full" onClick={() => void handleCopy()}>

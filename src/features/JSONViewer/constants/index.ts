@@ -1,11 +1,11 @@
 export const HISTORY_LIMIT = 50;
 
-export const EDITOR_FONT_SIZE = 13;
-export const EDITOR_LINE_HEIGHT = 24;
-export const EDITOR_GUTTER_BG = 'color-mix(in oklab, var(--muted) 60%, var(--background))';
-
-/** Highlighting is skipped past this size so typing stays responsive. */
-export const MAX_HIGHLIGHT_LENGTH = 120_000;
+export {
+  EDITOR_FONT_SIZE,
+  EDITOR_GUTTER_BG,
+  EDITOR_LINE_HEIGHT,
+  MAX_HIGHLIGHT_LENGTH,
+} from '@/components/SyntaxHighlight';
 
 export type ViewMode = 'tree' | 'raw';
 

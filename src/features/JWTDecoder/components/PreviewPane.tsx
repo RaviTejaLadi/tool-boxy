@@ -1,4 +1,5 @@
 import { AlertCircle } from 'lucide-react';
+import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { formatPart } from '../helpers';
 import { useJwtStore } from '../stores';
@@ -34,13 +35,14 @@ export function PreviewPane() {
           <ScrollArea className="h-full w-full">
             <div className="flex min-h-full flex-col p-6 lg:p-10">
               <p className="mb-3 font-mono text-[11px] tracking-wide text-muted-foreground uppercase">{activePart}</p>
-              <pre
-                className={`font-mono text-[13px] leading-6 whitespace-pre-wrap break-all ${
+              <SyntaxHighlight
+                code={previewText}
+                language={decodedData ? 'json' : 'text'}
+                wrap
+                className={`font-mono text-[13px] leading-6 break-all ${
                   decodedData ? 'text-foreground' : 'text-muted-foreground/50'
                 }`}
-              >
-                {previewText}
-              </pre>
+              />
             </div>
           </ScrollArea>
         )}
