@@ -47,6 +47,7 @@ export default function AppLayout() {
     pathname === '/pdf-viewer' ||
     pathname === '/svg-viewer' ||
     pathname === '/json-viewer' ||
+    pathname === '/csv-viewer' ||
     pathname === '/html-viewer' ||
     pathname === '/jwt-decoder' ||
     pathname === '/uuid-generator' ||

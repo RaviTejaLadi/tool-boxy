@@ -19,6 +19,7 @@ import UnitConverterPage from './pages/UnitConverterPage';
 import PDFViewerPage from './pages/PDFViewerPage';
 import SVGViewerPage from './pages/SVGViewerPage';
 import JSONViewerPage from './pages/JSONViewerPage';
+import CSVViewerPage from './pages/CSVViewerPage';
 import HTMLViewerPage from './pages/HTMLViewerPage';
 import JWTDecoderPage from './pages/JWTDecoderPage';
 import UUIDGeneratorPage from './pages/UUIDGeneratorPage';
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
       { path: 'pdf-viewer', Component: PDFViewerPage },
       { path: 'svg-viewer', Component: SVGViewerPage },
       { path: 'json-viewer', Component: JSONViewerPage },
+      { path: 'csv-viewer', Component: CSVViewerPage },
       { path: 'html-viewer', Component: HTMLViewerPage },
       { path: 'jwt-decoder', Component: JWTDecoderPage },
       { path: 'uuid-generator', Component: UUIDGeneratorPage },
