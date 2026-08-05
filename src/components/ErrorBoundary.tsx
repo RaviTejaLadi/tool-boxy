@@ -181,12 +181,7 @@ export class ErrorBoundary extends Component<Props, State> {
 }
 
 function ErrorPageBackdrop() {
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-0 h-56 hero-glow"
-    />
-  );
+  return <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-56 hero-glow" />;
 }
 
 export function RouteErrorBoundary() {

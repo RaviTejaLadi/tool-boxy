@@ -1,11 +1,6 @@
 import { type CSSProperties, type ReactNode, type Ref } from 'react';
 import { createElement as createHighlightElement, Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import {
-  EDITOR_FONT_SIZE,
-  EDITOR_GUTTER_BG,
-  EDITOR_LINE_HEIGHT,
-  MAX_HIGHLIGHT_LENGTH,
-} from './constants';
+import { EDITOR_FONT_SIZE, EDITOR_GUTTER_BG, EDITOR_LINE_HEIGHT, MAX_HIGHLIGHT_LENGTH } from './constants';
 import { useSyntaxTheme } from './useSyntaxTheme';
 
 type EditorCodeHighlightProps = {

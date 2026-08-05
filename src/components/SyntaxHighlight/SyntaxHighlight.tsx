@@ -25,10 +25,7 @@ function buildCodeTagStyle(themeVariant: SyntaxThemeVariant, override?: CSSPrope
   };
 }
 
-function buildPreStyle(
-  themeVariant: SyntaxThemeVariant,
-  override?: CSSProperties
-): CSSProperties {
+function buildPreStyle(themeVariant: SyntaxThemeVariant, override?: CSSProperties): CSSProperties {
   return {
     margin: 0,
     padding: 0,
@@ -82,8 +79,7 @@ export function SyntaxHighlight({
   const { style } = useSyntaxTheme(themeVariant);
   const safeCode = code ?? '';
   const shouldHighlight = safeCode.length <= maxLength;
-  const codeTagStyle =
-    typeof codeTagProps?.style === 'object' ? codeTagProps.style : undefined;
+  const codeTagStyle = typeof codeTagProps?.style === 'object' ? codeTagProps.style : undefined;
 
   if (!shouldHighlight) {
     return (
