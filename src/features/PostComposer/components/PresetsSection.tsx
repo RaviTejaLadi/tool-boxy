@@ -1,9 +1,10 @@
 // @ts-nocheck — typed gradually
 import { useState } from 'react';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { DESIGN_PRESETS, PRESET_CATEGORIES } from '../constants';
 import { useComposerStore } from '../stores';
+import { PresetThumbnail } from './PresetThumbnail';
 import { SectionHeading } from './SectionHeading';
 
 export function PresetsSection() {
@@ -17,7 +18,7 @@ export function PresetsSection() {
     <section>
       <SectionHeading className="mb-3">Templates</SectionHeading>
       <p className="mb-3 text-xs leading-relaxed text-muted-foreground">
-        Pick a template to apply to the current slide, or add it as a new slide.
+        Premium layouts with layered typography, accents, and shapes. Apply to the current slide or add as new.
       </p>
 
       <div className="mb-3 flex flex-wrap gap-1">
@@ -35,20 +36,29 @@ export function PresetsSection() {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {filtered.map((preset) => (
-          <div key={preset.id} className="group overflow-hidden rounded-lg border border-border bg-background">
-            <div
-              className="aspect-square w-full cursor-pointer transition-opacity hover:opacity-90"
-              style={{
-                backgroundColor: preset.background.type === 'color' ? preset.background.value : undefined,
-                backgroundImage: preset.background.type === 'gradient' ? preset.preview : undefined,
-              }}
+          <div
+            key={preset.id}
+            className="group overflow-hidden rounded-lg border border-border bg-background transition-shadow hover:shadow-md"
+          >
+            <button
+              type="button"
+              className="block w-full cursor-pointer text-left"
               onClick={() => applyPresetToSlide(preset.id)}
               title={`Apply ${preset.name} to current slide`}
-            />
-            <div className="space-y-1.5 p-2">
-              <p className="truncate font-mono text-[10px] font-medium">{preset.name}</p>
+            >
+              <PresetThumbnail preset={preset} />
+            </button>
+            <div className="space-y-2 border-t border-border p-2.5">
+              <div className="flex items-center gap-1.5">
+                <p className="min-w-0 flex-1 truncate font-mono text-[10px] font-semibold">{preset.name}</p>
+                {preset.category === 'Premium' && (
+                  <Badge variant="secondary" className="h-4 shrink-0 px-1.5 font-mono text-[8px] uppercase">
+                    Pro
+                  </Badge>
+                )}
+              </div>
               <div className="flex gap-1">
                 <Button
                   type="button"

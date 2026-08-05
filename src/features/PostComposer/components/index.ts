@@ -6,6 +6,7 @@ export { PreviewPane } from './PreviewPane';
 export { PostComposerSidebar } from './PostComposerSidebar';
 export { SidebarRail, SlideToolbarIcons } from './SidebarRail';
 export { SlideStrip } from './SlideStrip';
+export { PresetThumbnail } from './PresetThumbnail';
 export { PresetsSection } from './PresetsSection';
 export { BackgroundSection } from './BackgroundSection';
 export { TextSection } from './TextSection';
