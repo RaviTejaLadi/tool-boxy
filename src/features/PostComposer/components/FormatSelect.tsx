@@ -25,7 +25,7 @@ export function FormatSelect() {
     >
       <SelectTrigger
         aria-label="Canvas size"
-        className="pointer-events-auto h-8 w-75 bg-background/90 font-mono text-xs shadow-sm backdrop-blur-sm data-[size=default]:h-8 lg:w-[220px]"
+        className="pointer-events-auto h-8 w-75 bg-background/90 font-mono text-xs shadow-sm backdrop-blur-sm data-[size=default]:h-8 lg:w-55"
       >
         <SelectValue placeholder="Select size" />
       </SelectTrigger>

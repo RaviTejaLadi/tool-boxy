@@ -50,7 +50,7 @@ export function PostComposerSidebar() {
   const deleteSlide = useComposerStore((s) => s.deleteSlide);
 
   return (
-    <aside className="flex max-h-[50svh] w-full shrink-0 overflow-hidden border-t border-border bg-card lg:h-full lg:max-h-none lg:w-[420px] lg:min-h-0 lg:border-t-0 lg:border-l">
+    <aside className="flex max-h-[50svh] w-full shrink-0 overflow-hidden border-t border-border bg-card lg:h-full lg:max-h-none lg:w-105 lg:min-h-0 lg:border-t-0 lg:border-l">
       <SidebarRail hasSelection={Boolean(selectedId)} />
       <div className="flex min-w-0 flex-1 flex-col">
         <SlideToolbarIcons

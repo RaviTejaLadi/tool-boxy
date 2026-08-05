@@ -97,7 +97,7 @@ export function SlideStrip() {
           type="button"
           variant="outline"
           onClick={addBlankSlide}
-          className="flex h-[88px] w-16 shrink-0 flex-col items-center justify-center gap-1 border-dashed font-mono text-[9px] text-muted-foreground"
+          className="flex h-22 w-16 shrink-0 flex-col items-center justify-center gap-1 border-dashed font-mono text-[9px] text-muted-foreground"
         >
           <Plus className="size-4" />
           Add
