@@ -30,12 +30,28 @@ export async function exportCanvas(format: Format, background: Background, eleme
       } else if (el.shapeType === 'pill') {
         drawRoundedRect(ctx, el.x, el.y, el.width, el.height, el.height / 2);
         ctx.fill();
+      } else if (el.shapeType === 'frame') {
+        const thickness = Math.max(12, Math.min(el.width, el.height) * 0.08);
+        drawRoundedRect(ctx, el.x, el.y, el.width, el.height, el.radius || 0);
+        drawRoundedRect(
+          ctx,
+          el.x + thickness,
+          el.y + thickness,
+          el.width - thickness * 2,
+          el.height - thickness * 2,
+          Math.max(0, (el.radius || 0) - thickness)
+        );
+        ctx.fill('evenodd');
       } else {
         const mode = drawShapePath(ctx, el.shapeType, el.x, el.y, el.width, el.height);
         if (mode === 'rect') {
           drawRoundedRect(ctx, el.x, el.y, el.width, el.height, el.radius || 0);
         }
-        ctx.fill();
+        if (el.shapeType === 'ring' || el.shapeType === 'crescent') {
+          ctx.fill('evenodd');
+        } else {
+          ctx.fill();
+        }
       }
       if (el.stroke && el.strokeWidth) {
         ctx.strokeStyle = el.stroke;

@@ -260,7 +260,7 @@ export function InspectorSection() {
                   className="mt-2 h-8 w-full cursor-pointer rounded-md border border-border bg-background"
                 />
               </div>
-              {(selected.shapeType === 'rect' || selected.shapeType === 'pill') && (
+              {(selected.shapeType === 'rect' || selected.shapeType === 'pill' || selected.shapeType === 'frame') && (
                 <div>
                   <p className="mb-1.5 font-mono text-[10px] text-muted-foreground uppercase">
                     Corner radius: {selected.radius || 0}px

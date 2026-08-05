@@ -1,6 +1,6 @@
 // @ts-nocheck — typed gradually
 import { useComposerStore } from '../stores';
-import { getShapeBorderRadius, shapeClipPath } from '../helpers/shapePaths';
+import { getShapeRenderStyle } from '../helpers/shapePaths';
 import type { DesignPreset } from '../types';
 
 export function PresetThumbnail({ preset }: { preset: DesignPreset }) {
@@ -27,8 +27,7 @@ export function PresetThumbnail({ preset }: { preset: DesignPreset }) {
       >
         {elements.map((el, i) => {
           if (el.type === 'shape') {
-            const clip = shapeClipPath(el.shapeType);
-            const borderRadius = getShapeBorderRadius(el.shapeType, el.radius || 0, scale);
+            const shapeStyle = getShapeRenderStyle(el.shapeType, el.fill, el.radius || 0, scale);
             return (
               <div
                 key={i}
@@ -40,9 +39,7 @@ export function PresetThumbnail({ preset }: { preset: DesignPreset }) {
                   height: el.height * scale,
                   transform: `rotate(${el.rotation || 0}deg)`,
                   opacity: el.opacity ?? 1,
-                  backgroundColor: el.fill,
-                  clipPath: clip,
-                  borderRadius,
+                  ...shapeStyle,
                 }}
               />
             );

@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { FORMATS, DESIGN_PRESETS, findFormat } from '../constants';
 import { uid } from '../helpers';
+import { getShapeDefaultSize } from '../helpers/shapeDefaults';
 import { cloneSlide, createBlankSlide, createInitialSlides, createSlideFromPreset } from '../helpers/slideUtils';
 import type {
   Background,
@@ -316,22 +317,18 @@ export const useComposerStore = create<ComposerState>()(
 
       addShape: (shapeType) => {
         const { format } = get();
-        const size =
-          shapeType === 'line'
-            ? { width: 400, height: 8 }
-            : shapeType === 'arrow'
-            ? { width: 160, height: 80 }
-            : { width: 280, height: 280 };
+        const size = getShapeDefaultSize(shapeType);
         get().addElement({
           type: 'shape',
           shapeType,
           x: format.w / 2 - size.width / 2,
           y: format.h / 2 - size.height / 2,
-          radius: shapeType === 'rect' ? 16 : 0,
+          radius: size.radius ?? (shapeType === 'rect' ? 16 : 0),
           fill: '#14E8B4',
           opacity: 1,
           rotation: 0,
-          ...size,
+          width: size.width,
+          height: size.height,
         });
       },
 

@@ -4,7 +4,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { cn } from '@/lib/utils';
 import { useActiveBackground, useActiveElements, useComposerStore, usePanelStore } from '../stores';
 import { elementLabel, elementTypeLabel } from '../helpers/elementLabel';
-import { getShapeBorderRadius, shapeClipPath } from '../helpers/shapePaths';
+import { getShapeRenderStyle } from '../helpers/shapePaths';
 import { FormatSelect } from './FormatSelect';
 import { HoverOutline, SelectionOverlay } from './SelectionOverlay';
 import { SlideStrip } from './SlideStrip';
@@ -140,17 +140,14 @@ export function PreviewPane() {
 
     let inner = null;
     if (el.type === 'shape') {
-      const clip = shapeClipPath(el.shapeType);
-      const borderRadius = getShapeBorderRadius(el.shapeType, el.radius || 0, scale);
+      const shapeStyle = getShapeRenderStyle(el.shapeType, el.fill, el.radius || 0, scale);
       inner = (
         <div
           style={{
             width: '100%',
             height: '100%',
-            backgroundColor: el.fill,
-            clipPath: clip,
-            borderRadius,
-            border: el.stroke ? `${(el.strokeWidth || 2) * scale}px solid ${el.stroke}` : undefined,
+            ...shapeStyle,
+            border: el.stroke ? `${(el.strokeWidth || 2) * scale}px solid ${el.stroke}` : shapeStyle.border,
             boxSizing: 'border-box',
           }}
         />
