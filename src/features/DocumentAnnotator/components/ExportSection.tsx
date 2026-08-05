@@ -9,10 +9,12 @@ import { useAnnotatorStore } from '../stores';
 import type { ExportFormat } from '../types';
 import { SectionHeading } from './SectionHeading';
 
-const FORMATS: ExportFormat[] = ['png', 'jpeg', 'webp'];
+const FORMATS: ExportFormat[] = ['pdf', 'png', 'jpeg', 'webp'];
 
 export function ExportSection() {
   const image = useAnnotatorStore((s) => s.image);
+  const sourceKind = useAnnotatorStore((s) => s.sourceKind);
+  const numPages = useAnnotatorStore((s) => s.numPages);
   const exportFormat = useAnnotatorStore((s) => s.exportFormat);
   const exportQuality = useAnnotatorStore((s) => s.exportQuality);
   const setExportFormat = useAnnotatorStore((s) => s.setExportFormat);
@@ -71,7 +73,11 @@ export function ExportSection() {
       )}
 
       <p className="font-mono text-[11px] text-muted-foreground">
-        Uploaded format is kept by default. JPG exports use a white background.
+        {exportFormat === 'pdf' && sourceKind === 'pdf' && numPages > 1
+          ? `Exports all ${numPages} pages with annotations into one PDF.`
+          : exportFormat === 'pdf'
+          ? 'Exports the current view as a single-page PDF.'
+          : 'JPG/WebP use a white background. PDF is selected by default for uploaded PDFs.'}
       </p>
     </section>
   );

@@ -25,7 +25,7 @@ export function ShortcutsSection() {
           </li>
         ))}
       </ul>
-      <p className="mt-3 text-xs text-muted-foreground">Paste an image from the clipboard to load it.</p>
+      <p className="mt-3 text-xs text-muted-foreground">Drop or paste a PDF or image to start annotating.</p>
     </section>
   );
 }

@@ -1,12 +1,23 @@
-import { ImageDown, PenLine, Redo2, Trash2, Undo2, Upload } from 'lucide-react';
+import { FileDown, PenLine, Redo2, Trash2, Undo2, Upload } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { formatLabel } from '../helpers';
 import { useAnnotatorStore, selectAnnotations, selectCanUndo, selectCanRedo } from '../stores';
 
-export function ImageAnnotatorHeader({ onUpload, onDownload }: { onUpload: () => void; onDownload: () => void }) {
+export function DocumentAnnotatorHeader({
+  onUpload,
+  onDownload,
+  exporting = false,
+}: {
+  onUpload: () => void;
+  onDownload: () => void | Promise<void>;
+  exporting?: boolean;
+}) {
   const image = useAnnotatorStore((s) => s.image);
   const fileName = useAnnotatorStore((s) => s.fileName);
   const exportFormat = useAnnotatorStore((s) => s.exportFormat);
+  const sourceKind = useAnnotatorStore((s) => s.sourceKind);
+  const pageNumber = useAnnotatorStore((s) => s.pageNumber);
+  const numPages = useAnnotatorStore((s) => s.numPages);
   const annotations = useAnnotatorStore(selectAnnotations);
   const canUndo = useAnnotatorStore(selectCanUndo);
   const canRedo = useAnnotatorStore(selectCanRedo);
@@ -16,6 +27,14 @@ export function ImageAnnotatorHeader({ onUpload, onDownload }: { onUpload: () =>
   const setConfirmClear = useAnnotatorStore((s) => s.setConfirmClear);
   const clearAnnotations = useAnnotatorStore((s) => s.clearAnnotations);
 
+  const subtitle = !image
+    ? 'Drop a PDF or image — annotate in the browser'
+    : sourceKind === 'pdf'
+    ? `${fileName || 'document'} · page ${pageNumber}/${numPages} · ${annotations.length} mark${
+        annotations.length === 1 ? '' : 's'
+      }`
+    : `${fileName || 'image'} · ${annotations.length} annotation${annotations.length === 1 ? '' : 's'}`;
+
   return (
     <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-6 py-3">
       <div className="flex min-w-0 items-center gap-2.5">
@@ -23,12 +42,8 @@ export function ImageAnnotatorHeader({ onUpload, onDownload }: { onUpload: () =>
           <PenLine className="size-4" />
         </div>
         <div className="min-w-0">
-          <div className="font-heading text-sm leading-none font-semibold">Image Annotator</div>
-          <div className="mt-1 truncate font-mono text-[11px] leading-none text-muted-foreground">
-            {image
-              ? `${fileName || 'image'} · ${annotations.length} annotation${annotations.length === 1 ? '' : 's'}`
-              : 'Drop, paste, or upload an image — annotate in the browser'}
-          </div>
+          <div className="font-heading text-sm leading-none font-semibold">Document Annotator</div>
+          <div className="mt-1 truncate font-mono text-[11px] leading-none text-muted-foreground">{subtitle}</div>
         </div>
       </div>
 
@@ -44,7 +59,7 @@ export function ImageAnnotatorHeader({ onUpload, onDownload }: { onUpload: () =>
           size="icon"
           className={`size-8 hidden sm:flex ${confirmClear ? 'text-destructive' : ''}`}
           disabled={!image || annotations.length === 0}
-          title={confirmClear ? 'Click again to confirm' : 'Clear all annotations'}
+          title={confirmClear ? 'Click again to confirm' : 'Clear annotations on this page'}
           onClick={() => {
             if (!confirmClear) {
               setConfirmClear(true);
@@ -61,9 +76,9 @@ export function ImageAnnotatorHeader({ onUpload, onDownload }: { onUpload: () =>
           <Upload data-icon="inline-start" />
           {image ? 'Replace' : 'Upload'}
         </Button>
-        <Button size="sm" disabled={!image} onClick={onDownload}>
-          <ImageDown data-icon="inline-start" />
-          Export {formatLabel(exportFormat)}
+        <Button size="sm" disabled={!image || exporting} onClick={() => void onDownload()}>
+          <FileDown data-icon="inline-start" />
+          {exporting ? 'Exporting…' : `Export ${formatLabel(exportFormat)}`}
         </Button>
       </div>
     </header>

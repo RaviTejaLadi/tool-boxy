@@ -11,7 +11,7 @@ import {
 } from 'react';
 import { ImageOff, Upload } from 'lucide-react';
 import { HANDLE_PX, HIT_PAD_PX, MAX_ZOOM, MIN_ZOOM, TOOL_SHORTCUTS } from '../constants';
-import { boundsOf, clamp, drawAnnotation, hitTest, norm, readImageFile, uid } from '../helpers';
+import { boundsOf, clamp, drawAnnotation, hitTest, norm, readDocumentFile, uid } from '../helpers';
 import { useAnnotatorStore, selectAnnotations } from '../stores';
 import type {
   Annotation,
@@ -47,7 +47,9 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
   const pan = useAnnotatorStore((s) => s.pan);
   const showShortcuts = useAnnotatorStore((s) => s.showShortcuts);
 
-  const loadImage = useAnnotatorStore((s) => s.loadImage);
+  const loadDocument = useAnnotatorStore((s) => s.loadDocument);
+  const setLoading = useAnnotatorStore((s) => s.setLoading);
+  const isLoading = useAnnotatorStore((s) => s.isLoading);
   const commit = useAnnotatorStore((s) => s.commit);
   const undo = useAnnotatorStore((s) => s.undo);
   const redo = useAnnotatorStore((s) => s.redo);
@@ -71,11 +73,24 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
 
   const styleBase = useMemo(() => ({ color, strokeWidth, opacity, dashed }), [color, strokeWidth, opacity, dashed]);
 
-  const loadImageFile = useCallback(
+  const loadDocumentFile = useCallback(
     (file: File) => {
-      readImageFile(file, (img, meta) => loadImage(img, meta));
+      setLoading(true);
+      void readDocumentFile(file)
+        .then((loaded) => {
+          if (!loaded) {
+            setLoading(false);
+            return;
+          }
+          loadDocument(
+            loaded.image,
+            loaded.meta,
+            loaded.pdfData && loaded.numPages ? { data: loaded.pdfData, numPages: loaded.numPages } : undefined
+          );
+        })
+        .catch(() => setLoading(false));
     },
-    [loadImage]
+    [loadDocument, setLoading]
   );
 
   useEffect(() => {
@@ -84,15 +99,15 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
       const items = e.clipboardData?.items;
       if (!items) return;
       for (const item of Array.from(items)) {
-        if (item.type.startsWith('image/')) {
+        if (item.type.startsWith('image/') || item.type === 'application/pdf') {
           const file = item.getAsFile();
-          if (file) loadImageFile(file);
+          if (file) loadDocumentFile(file);
         }
       }
     };
     window.addEventListener('paste', onPaste);
     return () => window.removeEventListener('paste', onPaste);
-  }, [loadImageFile]);
+  }, [loadDocumentFile]);
 
   useEffect(() => {
     const el = containerRef.current;
@@ -616,7 +631,7 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
     e.preventDefault();
     setIsDragOver(false);
     const file = e.dataTransfer.files?.[0];
-    if (file) loadImageFile(file);
+    if (file) loadDocumentFile(file);
   };
 
   const editFontSize = textEdit?.id
@@ -643,23 +658,30 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
       onDrop={onDrop}
     >
       {image ? (
-        <canvas
-          ref={canvasRef}
-          className={`absolute inset-0 touch-none ${cursorClass}`}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerLeave={onPointerUp}
-          onWheel={onWheel}
-          onDoubleClick={(e) => {
-            if (tool !== 'select' && tool !== 'text') return;
-            const pt = screenToImage(e.clientX, e.clientY);
-            const hit = findAnnotationAt(pt);
-            if (hit && hit.type === 'text') {
-              startTextEdit(pt, hit);
-            }
-          }}
-        />
+        <>
+          <canvas
+            ref={canvasRef}
+            className={`absolute inset-0 touch-none ${cursorClass}`}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerLeave={onPointerUp}
+            onWheel={onWheel}
+            onDoubleClick={(e) => {
+              if (tool !== 'select' && tool !== 'text') return;
+              const pt = screenToImage(e.clientX, e.clientY);
+              const hit = findAnnotationAt(pt);
+              if (hit && hit.type === 'text') {
+                startTextEdit(pt, hit);
+              }
+            }}
+          />
+          {isLoading && (
+            <div className="absolute inset-0 z-40 flex items-center justify-center bg-background/50 font-mono text-xs text-muted-foreground backdrop-blur-[1px]">
+              Rendering page…
+            </div>
+          )}
+        </>
       ) : (
         <button
           type="button"
@@ -674,9 +696,11 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
             {isDragOver ? <Upload className="size-7" /> : <ImageOff className="size-7" />}
           </div>
           <div className="text-center">
-            <p className="text-sm font-medium text-foreground">Drop an image here, click to browse, or paste</p>
+            <p className="text-sm font-medium text-foreground">
+              {isLoading ? 'Loading document…' : 'Drop a PDF or image, click to browse, or paste'}
+            </p>
             <p className="mt-1 font-mono text-[11px] text-muted-foreground">
-              PNG, JPG, WEBP — export keeps the original format
+              PDF · PNG · JPG · WEBP — annotate page by page in the browser
             </p>
           </div>
         </button>

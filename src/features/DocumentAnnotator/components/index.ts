@@ -1,12 +1,14 @@
 export { SectionHeading } from './SectionHeading';
-export { ImageAnnotatorHeader } from './ImageAnnotatorHeader';
-export { ImageAnnotatorSidebar } from './ImageAnnotatorSidebar';
+export { DocumentAnnotatorHeader } from './DocumentAnnotatorHeader';
+export { DocumentAnnotatorSidebar } from './DocumentAnnotatorSidebar';
 export { PreviewPane } from './PreviewPane';
 export { ToolsSection } from './ToolsSection';
 export { ShapesSection } from './ShapesSection';
+export { PagesSection } from './PagesSection';
 export { StyleSection } from './StyleSection';
 export { LayersSection } from './LayersSection';
 export { ViewSection } from './ViewSection';
 export { ExportSection } from './ExportSection';
 export { InfoSection } from './InfoSection';
 export { ShortcutsSection } from './ShortcutsSection';
+export { ToolButtonGrid } from './ToolButtonGrid';

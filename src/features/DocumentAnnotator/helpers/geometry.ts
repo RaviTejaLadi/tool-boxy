@@ -68,14 +68,19 @@ export function detectExportFormat(mimeType: string, fileName = ''): 'png' | 'jp
   return 'png';
 }
 
-export function formatExtension(format: 'png' | 'jpeg' | 'webp') {
-  return format === 'jpeg' ? 'jpg' : format;
+export function formatExtension(format: 'png' | 'jpeg' | 'webp' | 'pdf') {
+  if (format === 'jpeg') return 'jpg';
+  return format;
 }
 
-export function formatMime(format: 'png' | 'jpeg' | 'webp') {
-  return format === 'jpeg' ? 'image/jpeg' : format === 'webp' ? 'image/webp' : 'image/png';
+export function formatMime(format: 'png' | 'jpeg' | 'webp' | 'pdf') {
+  if (format === 'jpeg') return 'image/jpeg';
+  if (format === 'webp') return 'image/webp';
+  if (format === 'pdf') return 'application/pdf';
+  return 'image/png';
 }
 
-export function formatLabel(format: 'png' | 'jpeg' | 'webp') {
-  return format === 'jpeg' ? 'JPG' : format.toUpperCase();
+export function formatLabel(format: 'png' | 'jpeg' | 'webp' | 'pdf') {
+  if (format === 'jpeg') return 'JPG';
+  return format.toUpperCase();
 }

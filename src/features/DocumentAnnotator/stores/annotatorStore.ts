@@ -6,8 +6,8 @@ import {
   DEFAULT_OPACITY,
   DEFAULT_STROKE_WIDTH,
 } from '../constants';
-import { formatExtension, formatMime, uid } from '../helpers';
-import type { Annotation, ExportFormat, ImageMeta, Point, Tool } from '../types';
+import { formatExtension, formatMime, renderPdfPage, uid } from '../helpers';
+import type { Annotation, DocumentMeta, ExportFormat, PageState, Point, SourceKind, Tool } from '../types';
 
 export interface AnnotatorState {
   image: HTMLImageElement | null;
@@ -15,6 +15,12 @@ export interface AnnotatorState {
   mimeType: string;
   exportFormat: ExportFormat;
   exportQuality: number;
+  sourceKind: SourceKind | null;
+  pdfData: ArrayBuffer | null;
+  pageNumber: number;
+  numPages: number;
+  pageStates: Record<number, PageState>;
+  isLoading: boolean;
   history: Annotation[][];
   historyIndex: number;
   tool: Tool;
@@ -31,8 +37,10 @@ export interface AnnotatorState {
   showShortcuts: boolean;
   confirmClear: boolean;
 
-  loadImage: (image: HTMLImageElement, meta?: Partial<ImageMeta>) => void;
-  clearImage: () => void;
+  loadDocument: (image: HTMLImageElement, meta: DocumentMeta, pdf?: { data: ArrayBuffer; numPages: number }) => void;
+  clearDocument: () => void;
+  setPage: (pageNumber: number) => Promise<void>;
+  setLoading: (isLoading: boolean) => void;
   commit: (next: Annotation[]) => void;
   undo: () => void;
   redo: () => void;
@@ -62,9 +70,23 @@ export interface AnnotatorState {
 
 const emptyHistory = (): Annotation[][] => [[]];
 
+const emptyPageState = (): PageState => ({
+  history: emptyHistory(),
+  historyIndex: 0,
+  nextCallout: 1,
+});
+
 function withFileName(fileName: string, format: ExportFormat) {
-  const base = fileName.replace(/\.(png|jpe?g|webp)$/i, '') || 'annotated-image';
+  const base = fileName.replace(/\.(png|jpe?g|webp|pdf)$/i, '') || 'annotated-document';
   return `${base.replace(/-annotated$/i, '')}-annotated.${formatExtension(format)}`;
+}
+
+function snapshotPage(s: AnnotatorState): PageState {
+  return {
+    history: s.history,
+    historyIndex: s.historyIndex,
+    nextCallout: s.nextCallout,
+  };
 }
 
 export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
@@ -73,6 +95,12 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
   mimeType: 'image/png',
   exportFormat: 'png',
   exportQuality: DEFAULT_EXPORT_QUALITY,
+  sourceKind: null,
+  pdfData: null,
+  pageNumber: 1,
+  numPages: 1,
+  pageStates: {},
+  isLoading: false,
   history: emptyHistory(),
   historyIndex: 0,
   tool: 'select',
@@ -89,13 +117,17 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
   showShortcuts: false,
   confirmClear: false,
 
-  loadImage: (image, meta = {}) => {
-    const format = meta.format ?? 'png';
+  loadDocument: (image, meta, pdf) => {
     set({
       image,
-      fileName: meta.name ?? withFileName('image', format),
-      mimeType: meta.mimeType ?? formatMime(format),
-      exportFormat: format,
+      fileName: meta.name,
+      mimeType: meta.mimeType,
+      exportFormat: meta.format,
+      sourceKind: meta.sourceKind,
+      pdfData: pdf?.data ?? null,
+      pageNumber: 1,
+      numPages: pdf?.numPages ?? 1,
+      pageStates: {},
       history: emptyHistory(),
       historyIndex: 0,
       selectedId: null,
@@ -103,15 +135,21 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
       pan: { x: 0, y: 0 },
       nextCallout: 1,
       confirmClear: false,
+      isLoading: false,
     });
   },
 
-  clearImage: () =>
+  clearDocument: () =>
     set({
       image: null,
       fileName: '',
       mimeType: 'image/png',
       exportFormat: 'png',
+      sourceKind: null,
+      pdfData: null,
+      pageNumber: 1,
+      numPages: 1,
+      pageStates: {},
       history: emptyHistory(),
       historyIndex: 0,
       selectedId: null,
@@ -119,12 +157,41 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
       pan: { x: 0, y: 0 },
       nextCallout: 1,
       confirmClear: false,
+      isLoading: false,
     }),
 
+  setPage: async (pageNumber) => {
+    const s = get();
+    if (!s.pdfData || pageNumber < 1 || pageNumber > s.numPages || pageNumber === s.pageNumber) return;
+
+    const pageStates = { ...s.pageStates, [s.pageNumber]: snapshotPage(s) };
+    const nextPage = pageStates[pageNumber] ?? emptyPageState();
+
+    set({ isLoading: true, selectedId: null });
+    try {
+      const image = await renderPdfPage(s.pdfData, pageNumber);
+      set({
+        image,
+        pageNumber,
+        pageStates,
+        history: nextPage.history,
+        historyIndex: nextPage.historyIndex,
+        nextCallout: nextPage.nextCallout,
+        zoom: 1,
+        pan: { x: 0, y: 0 },
+        isLoading: false,
+      });
+    } catch {
+      set({ isLoading: false });
+    }
+  },
+
+  setLoading: (isLoading) => set({ isLoading }),
+
   commit: (next) => {
-    set((s) => ({
-      history: [...s.history.slice(0, s.historyIndex + 1), next],
-      historyIndex: s.historyIndex + 1,
+    set((state) => ({
+      history: [...state.history.slice(0, state.historyIndex + 1), next],
+      historyIndex: state.historyIndex + 1,
     }));
   },
 
@@ -173,7 +240,7 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
   setExportFormat: (exportFormat) =>
     set((s) => ({
       exportFormat,
-      fileName: withFileName(s.fileName || 'image', exportFormat),
+      fileName: withFileName(s.fileName || 'document', exportFormat),
       mimeType: formatMime(exportFormat),
     })),
 
@@ -258,3 +325,4 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
 export const selectAnnotations = (s: AnnotatorState) => s.history[s.historyIndex] ?? [];
 export const selectCanUndo = (s: AnnotatorState) => s.historyIndex > 0;
 export const selectCanRedo = (s: AnnotatorState) => s.historyIndex < s.history.length - 1;
+export const selectHasDocument = (s: AnnotatorState) => Boolean(s.image);

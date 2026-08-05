@@ -14,7 +14,8 @@ export type Tool =
 
 export type ShapeType = 'rect' | 'ellipse' | 'highlight' | 'redact';
 export type PathType = 'line' | 'arrow' | 'pen';
-export type ExportFormat = 'png' | 'jpeg' | 'webp';
+export type ExportFormat = 'png' | 'jpeg' | 'webp' | 'pdf';
+export type SourceKind = 'image' | 'pdf';
 
 export interface Point {
   x: number;
@@ -76,8 +77,15 @@ export interface Bounds {
   h: number;
 }
 
-export interface ImageMeta {
+export interface DocumentMeta {
   name: string;
   mimeType: string;
   format: ExportFormat;
+  sourceKind: SourceKind;
+}
+
+export interface PageState {
+  history: Annotation[][];
+  historyIndex: number;
+  nextCallout: number;
 }

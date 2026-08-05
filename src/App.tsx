@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
 
 import { RouteErrorBoundary } from './components/ErrorBoundary';
 import AppLayout from './layouts/AppLayout';
@@ -41,7 +41,7 @@ import GlassmorphismGeneratorPage from './pages/GlassmorphismGeneratorPage';
 import AnimationGeneratorPage from './pages/AnimationGeneratorPage';
 import FlexPatternsPage from './pages/FlexPatternsPage';
 import PostComposerPage from './pages/PostComposerPage';
-import ImageAnnotatorPage from './pages/ImageAnnotatorPage';
+import DocumentAnnotatorPage from './pages/DocumentAnnotatorPage';
 
 const router = createBrowserRouter([
   {
@@ -52,7 +52,8 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: 'code-snippet', Component: CodeSnippetPage },
       { path: 'post-composer', Component: PostComposerPage },
-      { path: 'image-annotator', Component: ImageAnnotatorPage },
+      { path: 'document-annotator', Component: DocumentAnnotatorPage },
+      { path: 'image-annotator', element: <Navigate to="/document-annotator" replace /> },
       { path: 'palette-collection', Component: PaletteCollectionPage },
       { path: 'palette-generator', Component: PaletteGeneratorPage },
       { path: 'tailwind-shade-generator', Component: TailwindShadeGeneratorPage },
