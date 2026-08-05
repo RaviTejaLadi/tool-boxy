@@ -184,7 +184,7 @@ function ErrorPageBackdrop() {
   return (
     <div
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(ellipse_at_top,oklch(0.88_0.06_230_/0.55),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_top,oklch(0.35_0.06_240_/0.45),transparent_70%)]"
+      className="pointer-events-none absolute inset-x-0 top-0 h-56 hero-glow"
     />
   );
 }

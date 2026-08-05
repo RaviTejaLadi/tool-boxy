@@ -10,15 +10,15 @@ function ToolCard({ tool }: { tool: Tool }) {
   return (
     <Link
       to={tool.url}
-      className="group relative flex gap-2.5 rounded-md border border-border bg-card/60 p-3 transition-colors hover:border-primary/40 hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="group relative flex gap-2.5 rounded-lg border border-border/80 bg-card/70 p-3 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-primary/35 hover:bg-accent/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
     >
-      <div className="flex size-7 shrink-0 items-center justify-center rounded bg-primary text-primary-foreground">
+      <div className="flex size-7 shrink-0 items-center justify-center rounded-md bg-primary text-primary-foreground shadow-[0_0_12px_color-mix(in_oklab,var(--primary)_35%,transparent)] transition-shadow group-hover:shadow-[0_0_16px_color-mix(in_oklab,var(--primary)_50%,transparent)]">
         <Icon className="size-3.5" />
       </div>
 
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-1.5">
-          <span className="truncate font-heading text-sm font-medium tracking-tight group-hover:text-primary">
+          <span className="truncate font-heading text-sm font-semibold tracking-tight transition-colors group-hover:text-primary">
             {tool.title}
           </span>
           {/* {tool.badge ? (
@@ -37,18 +37,20 @@ function ToolCard({ tool }: { tool: Tool }) {
 export default function Home() {
   return (
     <div className="relative mx-auto w-full max-w-5xl pt-6 pb-10">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-4 h-56 bg-[radial-gradient(ellipse_at_top,oklch(0.88_0.06_230_/0.55),transparent_70%)] dark:bg-[radial-gradient(ellipse_at_top,oklch(0.35_0.06_240_/0.45),transparent_70%)]"
-      />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 -top-4 h-64 hero-glow" />
 
-      <section className="relative flex flex-col gap-4 border-b border-border pb-10">
-        <h1 className="font-heading text-4xl font-medium tracking-tight sm:text-5xl">Tool Boxy</h1>
-        <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+      <section className="relative flex flex-col gap-5 border-b border-border/80 pb-10">
+        <div className="inline-flex w-fit items-center gap-2 rounded-full border border-primary/20 bg-primary/8 px-3 py-1 font-mono text-[11px] tracking-wide text-primary">
+          <span className="size-1.5 rounded-full bg-primary shadow-[0_0_6px_var(--primary)]" />
+          {tools.length} tools · browser-native
+        </div>
+        <h1 className="font-heading text-4xl font-bold tracking-tight sm:text-5xl lg:text-[3.25rem] lg:leading-[1.1]">
+          <span className="text-gradient-brand">Tool Boxy</span>
+        </h1>
+        <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
           A collection of small, focused utilities for developers, designers, and creators. Fast, frictionless, and
           ready when you need them — no tab sprawl required.
         </p>
-        <p className="font-mono text-xs text-muted-foreground">{tools.length} tools · runs in your browser</p>
       </section>
 
       {/* <section className="relative mt-10 flex flex-col gap-5">

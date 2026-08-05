@@ -83,11 +83,11 @@ export function AppSidebar(props: AppSidebarProps) {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" render={<Link to="/" />}>
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <PackageIcon />
+              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground shadow-[0_0_14px_color-mix(in_oklab,var(--sidebar-primary)_40%,transparent)]">
+                <PackageIcon weight="fill" />
               </div>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">Tool Boxy</span>
+                <span className="truncate font-heading font-semibold tracking-tight">Tool Boxy</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>

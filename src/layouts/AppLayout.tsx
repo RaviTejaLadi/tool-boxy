@@ -70,7 +70,7 @@ export default function AppLayout() {
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
       <AppSidebar />
       <SidebarInset className={isFullBleed ? 'min-h-0 overflow-hidden' : undefined}>
-        <header className="flex h-12 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-10">
+        <header className="flex h-12 shrink-0 items-center gap-2 border-b border-border/80 bg-background/75 backdrop-blur-md transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-10">
           <div className="flex min-w-0 flex-1 items-center gap-2 px-4">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-2 data-vertical:h-4 data-vertical:self-auto" />
