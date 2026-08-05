@@ -35,6 +35,7 @@ import {
   Square,
   Sparkles,
   LayoutGrid,
+  LayoutTemplate,
 } from 'lucide-react';
 
 export type ToolCategory = 'Colour' | 'CSS' | 'Image' | 'Developer' | 'Text' | 'Converters';
@@ -222,6 +223,15 @@ export const tools: Tool[] = [
     category: 'Developer',
     icon: FileCode2,
     featured: true,
+  },
+  {
+    title: 'Post Composer',
+    description: 'Design social posts with text, shapes, and images',
+    url: '/post-composer',
+    category: 'Image',
+    icon: LayoutTemplate,
+    featured: true,
+    badge: 'New',
   },
   {
     title: 'HTML Viewer',

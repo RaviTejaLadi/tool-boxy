@@ -38,6 +38,7 @@ import BorderRadiusGeneratorPage from './pages/BorderRadiusGeneratorPage';
 import GlassmorphismGeneratorPage from './pages/GlassmorphismGeneratorPage';
 import AnimationGeneratorPage from './pages/AnimationGeneratorPage';
 import FlexPatternsPage from './pages/FlexPatternsPage';
+import PostComposerPage from './pages/PostComposerPage';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, Component: Home },
       { path: 'code-snippet', Component: CodeSnippetPage },
+      { path: 'post-composer', Component: PostComposerPage },
       { path: 'palette-collection', Component: PaletteCollectionPage },
       { path: 'palette-generator', Component: PaletteGeneratorPage },
       { path: 'tailwind-shade-generator', Component: TailwindShadeGeneratorPage },

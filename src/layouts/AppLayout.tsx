@@ -31,6 +31,7 @@ export default function AppLayout() {
 
   const isFullBleed =
     pathname === '/code-snippet' ||
+    pathname === '/post-composer' ||
     pathname === '/palette-collection' ||
     pathname === '/palette-generator' ||
     pathname === '/tailwind-shade-generator' ||
