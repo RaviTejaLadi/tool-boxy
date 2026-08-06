@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { RouteErrorBoundary } from './components/ErrorBoundary';
 import AppLayout from './layouts/AppLayout';
@@ -52,8 +52,7 @@ const router = createBrowserRouter([
       { index: true, Component: Home },
       { path: 'code-snippet', Component: CodeSnippetPage },
       { path: 'post-composer', Component: PostComposerPage },
-      { path: 'document-annotator', Component: DocumentAnnotatorPage },
-      { path: 'image-annotator', element: <Navigate to="/document-annotator" replace /> },
+      { path: 'image-annotator', Component: DocumentAnnotatorPage },
       { path: 'palette-collection', Component: PaletteCollectionPage },
       { path: 'palette-generator', Component: PaletteGeneratorPage },
       { path: 'tailwind-shade-generator', Component: TailwindShadeGeneratorPage },
@@ -66,7 +65,7 @@ const router = createBrowserRouter([
       { path: 'image-stitcher', Component: ImageStitcherPage },
       { path: 'base-converter', Component: BaseConverterPage },
       { path: 'unit-converter', Component: UnitConverterPage },
-      { path: 'pdf-viewer', Component: PDFViewerPage },
+      { path: 'pdf-toolkit', Component: PDFViewerPage },
       { path: 'svg-viewer', Component: SVGViewerPage },
       { path: 'json-viewer', Component: JSONViewerPage },
       { path: 'csv-viewer', Component: CSVViewerPage },

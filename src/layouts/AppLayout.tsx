@@ -32,7 +32,7 @@ export default function AppLayout() {
   const isFullBleed =
     pathname === '/code-snippet' ||
     pathname === '/post-composer' ||
-    pathname === '/document-annotator' ||
+    pathname === '/image-annotator' ||
     pathname === '/palette-collection' ||
     pathname === '/palette-generator' ||
     pathname === '/tailwind-shade-generator' ||
@@ -45,7 +45,7 @@ export default function AppLayout() {
     pathname === '/image-stitcher' ||
     pathname === '/base-converter' ||
     pathname === '/unit-converter' ||
-    pathname === '/pdf-viewer' ||
+    pathname === '/pdf-toolkit' ||
     pathname === '/svg-viewer' ||
     pathname === '/json-viewer' ||
     pathname === '/csv-viewer' ||

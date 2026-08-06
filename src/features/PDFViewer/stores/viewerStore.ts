@@ -7,11 +7,12 @@ export interface ViewerState {
   pageNumber: number;
   scale: number;
   rotation: number;
-  twoPageView: boolean;
+  pagesPerRow: 1 | 2 | 3;
   isDragging: boolean;
   isLoading: boolean;
   error: string | null;
   setFile: (file: File | null) => void;
+  replaceFile: (file: File | null) => void;
   setNumPages: (numPages: number) => void;
   setPageNumber: (pageNumber: number) => void;
   setScale: (scale: number) => void;
@@ -19,7 +20,7 @@ export interface ViewerState {
   zoomOut: () => void;
   resetZoom: () => void;
   rotate: () => void;
-  toggleTwoPageView: () => void;
+  setPagesPerRow: (pagesPerRow: 1 | 2 | 3) => void;
   setDragging: (isDragging: boolean) => void;
   setLoading: (isLoading: boolean) => void;
   setError: (error: string | null) => void;
@@ -32,28 +33,37 @@ export const useViewerStore = create<ViewerState>((set, get) => ({
   pageNumber: 1,
   scale: 1,
   rotation: 0,
-  twoPageView: false,
+  pagesPerRow: 1,
   isDragging: false,
   isLoading: false,
   error: null,
   setFile: (file) =>
-    set({
+    set((state) => ({
       file,
       numPages: null,
       pageNumber: 1,
       scale: 1,
       rotation: 0,
-      twoPageView: false,
+      pagesPerRow: state.pagesPerRow,
       error: null,
       isLoading: file != null,
-    }),
+    })),
+  replaceFile: (file) =>
+    set((state) => ({
+      file,
+      numPages: null,
+      pageNumber: file ? state.pageNumber : 1,
+      scale: state.scale,
+      rotation: state.rotation,
+      pagesPerRow: state.pagesPerRow,
+      error: null,
+      isLoading: file != null,
+    })),
   setNumPages: (numPages) => set({ numPages, isLoading: false, error: null }),
   setPageNumber: (pageNumber) => {
-    const { numPages, twoPageView } = get();
+    const { numPages } = get();
     const max = numPages ?? 1;
-    let next = Math.min(Math.max(pageNumber, 1), max);
-    // Keep left page odd-aligned when browsing two-up (1-2, 3-4, …)
-    if (twoPageView && next % 2 === 0) next = Math.max(next - 1, 1);
+    const next = Math.min(Math.max(pageNumber, 1), max);
     set({ pageNumber: next });
   },
   setScale: (scale) => set({ scale: Math.min(Math.max(scale, MIN_SCALE), MAX_SCALE) }),
@@ -67,13 +77,7 @@ export const useViewerStore = create<ViewerState>((set, get) => ({
   },
   resetZoom: () => set({ scale: 1 }),
   rotate: () => set({ rotation: (get().rotation + 90) % 360 }),
-  toggleTwoPageView: () => {
-    const { twoPageView, pageNumber } = get();
-    const next = !twoPageView;
-    // Snap to odd left page when enabling two-up
-    const snapped = next && pageNumber % 2 === 0 ? Math.max(pageNumber - 1, 1) : pageNumber;
-    set({ twoPageView: next, pageNumber: snapped });
-  },
+  setPagesPerRow: (pagesPerRow) => set({ pagesPerRow }),
   setDragging: (isDragging) => set({ isDragging }),
   setLoading: (isLoading) => set({ isLoading }),
   setError: (error) => set({ error, isLoading: false }),
@@ -84,7 +88,7 @@ export const useViewerStore = create<ViewerState>((set, get) => ({
       pageNumber: 1,
       scale: 1,
       rotation: 0,
-      twoPageView: false,
+      pagesPerRow: 1,
       isDragging: false,
       isLoading: false,
       error: null,

@@ -1,8 +1,14 @@
-import { FileType, Trash2 } from 'lucide-react';
+import { FileType, PanelRightClose, PanelRightOpen, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useViewerStore } from '../stores';
 
-export function PDFViewerHeader() {
+export function PDFViewerHeader({
+  showOperationsPanel,
+  onToggleOperationsPanel,
+}: {
+  showOperationsPanel: boolean;
+  onToggleOperationsPanel: () => void;
+}) {
   const file = useViewerStore((s) => s.file);
   const clearAll = useViewerStore((s) => s.clearAll);
 
@@ -13,17 +19,27 @@ export function PDFViewerHeader() {
           <FileType className="size-4" />
         </div>
         <div>
-          <div className="font-heading text-sm leading-none font-semibold">PDF Viewer</div>
+          <div className="font-heading text-sm leading-none font-semibold">PDF Toolkit</div>
           <div className="mt-1 font-mono text-[11px] leading-none text-muted-foreground">
-            Preview, zoom, and navigate PDF files
+            View, merge, split, organize, and convert PDF files offline
           </div>
         </div>
       </div>
 
-      <Button variant="outline" size="sm" onClick={clearAll} disabled={!file}>
-        <Trash2 data-icon="inline-start" />
-        Clear
-      </Button>
+      <div className="flex items-center gap-1.5">
+        <Button variant="outline" size="sm" onClick={onToggleOperationsPanel}>
+          {showOperationsPanel ? (
+            <PanelRightClose data-icon="inline-start" />
+          ) : (
+            <PanelRightOpen data-icon="inline-start" />
+          )}
+          {showOperationsPanel ? 'Hide Tools' : 'Show Tools'}
+        </Button>
+        <Button variant="outline" size="sm" onClick={clearAll} disabled={!file}>
+          <Trash2 data-icon="inline-start" />
+          Clear
+        </Button>
+      </div>
     </header>
   );
 }

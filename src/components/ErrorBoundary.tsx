@@ -1,5 +1,5 @@
-import { Component, type ErrorInfo, type ReactNode } from 'react';
-import { TriangleAlert } from 'lucide-react';
+import { Component, useMemo, useState, type ErrorInfo, type ReactNode } from 'react';
+import { Check, Copy, TriangleAlert } from 'lucide-react';
 import { isRouteErrorResponse, Link, useNavigate, useRouteError } from 'react-router-dom';
 
 import { Button, buttonVariants } from '@/components/ui/button';
@@ -76,6 +76,36 @@ export function ErrorFallback({
   className,
 }: ErrorFallbackProps) {
   const message = detail ?? error.message ?? 'Unknown error occurred';
+  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'failed'>('idle');
+  const copyPayload = useMemo(() => {
+    const sections = [`Message: ${message}`];
+    if (error.stack) sections.push(`Stack:\n${error.stack}`);
+    if (errorInfo?.componentStack) sections.push(`Component Stack:\n${errorInfo.componentStack.trim()}`);
+    return sections.join('\n\n');
+  }, [message, error.stack, errorInfo?.componentStack]);
+
+  const handleCopy = async () => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(copyPayload);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = copyPayload;
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+      setCopyState('copied');
+      window.setTimeout(() => setCopyState('idle'), 1800);
+    } catch {
+      setCopyState('failed');
+      window.setTimeout(() => setCopyState('idle'), 2200);
+    }
+  };
 
   return (
     <Empty className={cn('relative mx-auto w-full max-w-md px-0', className)}>
@@ -89,7 +119,13 @@ export function ErrorFallback({
 
       <Card className="w-full text-left ring-foreground/10">
         <CardHeader className="border-b pb-(--card-spacing)">
-          <CardTitle className="text-xs font-normal text-muted-foreground">Details</CardTitle>
+          <div className="flex items-center justify-between gap-2">
+            <CardTitle className="text-xs font-normal text-muted-foreground">Details</CardTitle>
+            <Button type="button" variant="ghost" size="xs" onClick={() => void handleCopy()}>
+              {copyState === 'copied' ? <Check data-icon="inline-start" /> : <Copy data-icon="inline-start" />}
+              {copyState === 'copied' ? 'Copied' : copyState === 'failed' ? 'Copy failed' : 'Copy error'}
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <p className="font-mono text-xs leading-relaxed text-foreground/90 wrap-break-word">{message}</p>
@@ -126,6 +162,8 @@ interface State {
 }
 
 export class ErrorBoundary extends Component<Props, State> {
+  private removeHotUpdateListener: (() => void) | null = null;
+
   public state: State = {
     hasError: false,
     error: null,
@@ -146,6 +184,26 @@ export class ErrorBoundary extends Component<Props, State> {
       error: normalizeError(error),
       errorInfo,
     });
+  }
+
+  public componentDidMount(): void {
+    if (!import.meta.hot) return;
+
+    const handleAfterUpdate = () => {
+      if (this.state.hasError) {
+        this.handleReset();
+      }
+    };
+
+    import.meta.hot.on('vite:afterUpdate', handleAfterUpdate);
+    this.removeHotUpdateListener = () => {
+      import.meta.hot?.off('vite:afterUpdate', handleAfterUpdate);
+    };
+  }
+
+  public componentWillUnmount(): void {
+    this.removeHotUpdateListener?.();
+    this.removeHotUpdateListener = null;
   }
 
   private handleReset = (): void => {

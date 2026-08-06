@@ -239,7 +239,7 @@ export const tools: Tool[] = [
   {
     title: 'Document Annotator',
     description: 'Annotate PDFs and images with shapes, text, highlights, and redactions',
-    url: '/document-annotator',
+    url: '/image-annotator',
     category: 'Developer',
     icon: PenLine,
     featured: true,
@@ -291,9 +291,9 @@ export const tools: Tool[] = [
     badge: 'New',
   },
   {
-    title: 'PDF Viewer',
-    description: 'Preview, zoom, rotate, and navigate PDF files in the browser',
-    url: '/pdf-viewer',
+    title: 'PDF Toolkit',
+    description: 'Offline PDF toolkit: preview, merge, split, organize pages, and convert to Word/text',
+    url: '/pdf-toolkit',
     category: 'Developer',
     icon: FileType,
     featured: true,

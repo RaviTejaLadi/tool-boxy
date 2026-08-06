@@ -4,7 +4,8 @@
 
 **Finding the right utility shouldn’t slow down your workflow.**
 
-A lightweight, all-in-one web toolkit for developers, designers, and creators —  
+A lightweight, all-in-one web toolkit for developers, designers, and creators
+—  
 fast, frictionless answers without opening a dozen browser tabs. 🚀
 
 <br />
@@ -28,14 +29,14 @@ fast, frictionless answers without opening a dozen browser tabs. 🚀
 
 ## ✨ Why Tool Boxy?
 
-| | |
-|---|---|
+|                      |                                                                  |
+| -------------------- | ---------------------------------------------------------------- |
 | 🔒 **Privacy-first** | Everything runs in your browser — files never leave your machine |
-| ⚡ **Instant** | Open a tool and go — no accounts, no waiting |
-| 🗂️ **Organized** | Colour · CSS · Image · Developer · Text · Converters |
-| ⭐ **Favorites** | Pin the tools you reach for most |
-| 🌙 **Light & dark** | Theme that follows you (or the system) |
-| 📱 **Responsive** | Feels at home on desktop and mobile |
+| ⚡ **Instant**       | Open a tool and go — no accounts, no waiting                     |
+| 🗂️ **Organized**     | Colour · CSS · Image · Developer · Text · Converters             |
+| ⭐ **Favorites**     | Pin the tools you reach for most                                 |
+| 🌙 **Light & dark**  | Theme that follows you (or the system)                           |
+| 📱 **Responsive**    | Feels at home on desktop and mobile                              |
 
 ---
 
@@ -58,86 +59,86 @@ fast, frictionless answers without opening a dozen browser tabs. 🚀
 
 ### 🎨 Colour
 
-| Tool | Description |
-|:-----|:------------|
-| [Palette Generator](https://tool-boxy.vercel.app/palette-generator) | Generate beautiful colour palettes |
-| [Palette Collection](https://tool-boxy.vercel.app/palette-collection) | Browse and pick curated palettes |
-| [Colour Converter](https://tool-boxy.vercel.app/colour-converter) | Convert between colour formats |
-| [Contrast Checker](https://tool-boxy.vercel.app/contrast-checker) | Check WCAG colour contrast compliance |
+| Tool                                                                              | Description                                  |
+| :-------------------------------------------------------------------------------- | :------------------------------------------- |
+| [Palette Generator](https://tool-boxy.vercel.app/palette-generator)               | Generate beautiful colour palettes           |
+| [Palette Collection](https://tool-boxy.vercel.app/palette-collection)             | Browse and pick curated palettes             |
+| [Colour Converter](https://tool-boxy.vercel.app/colour-converter)                 | Convert between colour formats               |
+| [Contrast Checker](https://tool-boxy.vercel.app/contrast-checker)                 | Check WCAG colour contrast compliance        |
 | [Tailwind Shade Generator](https://tool-boxy.vercel.app/tailwind-shade-generator) | Generate Tailwind colour scales from any hex |
 
 ### 💅 CSS
 
-| Tool | Description |
-|:-----|:------------|
-| [Gradient Generator](https://tool-boxy.vercel.app/gradient-generator) | Create linear, corner, and mesh gradients |
-| [Border Radius Generator](https://tool-boxy.vercel.app/border-radius-generator) | Design per-corner border-radius and copy CSS |
-| [Animation Generator](https://tool-boxy.vercel.app/animation-generator) | Keyframe animations with live preview |
-| [Glassmorphism Generator](https://tool-boxy.vercel.app/glassmorphism-generator) | Build frosted-glass CSS with live preview |
-| [Flex Patterns](https://tool-boxy.vercel.app/flex-patterns) | 20 real-world flex layouts with copy-ready HTML/CSS |
+| Tool                                                                            | Description                                         |
+| :------------------------------------------------------------------------------ | :-------------------------------------------------- |
+| [Gradient Generator](https://tool-boxy.vercel.app/gradient-generator)           | Create linear, corner, and mesh gradients           |
+| [Border Radius Generator](https://tool-boxy.vercel.app/border-radius-generator) | Design per-corner border-radius and copy CSS        |
+| [Animation Generator](https://tool-boxy.vercel.app/animation-generator)         | Keyframe animations with live preview               |
+| [Glassmorphism Generator](https://tool-boxy.vercel.app/glassmorphism-generator) | Build frosted-glass CSS with live preview           |
+| [Flex Patterns](https://tool-boxy.vercel.app/flex-patterns)                     | 20 real-world flex layouts with copy-ready HTML/CSS |
 
 ### 🖼️ Image
 
-| Tool | Description |
-|:-----|:------------|
-| [Placeholder Generator](https://tool-boxy.vercel.app/placeholder-generator) | Customisable placeholder images (PNG / SVG) |
-| [Image Converter](https://tool-boxy.vercel.app/image-converter) | Convert PNG, JPEG, WebP and more |
-| [Image Splitter](https://tool-boxy.vercel.app/image-splitter) | Split images into a downloadable tile grid |
-| [Image Stitcher](https://tool-boxy.vercel.app/image-stitcher) | Combine multiple images into one |
-| [Base64 Image Encoder](https://tool-boxy.vercel.app/base64-image-encoder) | Embed images as Base64 for CSS/HTML |
-| [Favicon Generator](https://tool-boxy.vercel.app/favicon-generator) | Favicon sizes + HTML snippets |
-| [QR Code Generator](https://tool-boxy.vercel.app/qr-code-generator) | Customisable QR codes from URL or text |
-| [SVG Viewer](https://tool-boxy.vercel.app/svg-viewer) | Paste SVG and preview with zoom |
-| [ASCII Art Generator](https://tool-boxy.vercel.app/ascii-art-generator) | Convert images into ASCII art |
-| [Post Composer](https://tool-boxy.vercel.app/post-composer) | Design social posts with text, shapes & images |
+| Tool                                                                        | Description                                    |
+| :-------------------------------------------------------------------------- | :--------------------------------------------- |
+| [Placeholder Generator](https://tool-boxy.vercel.app/placeholder-generator) | Customisable placeholder images (PNG / SVG)    |
+| [Image Converter](https://tool-boxy.vercel.app/image-converter)             | Convert PNG, JPEG, WebP and more               |
+| [Image Splitter](https://tool-boxy.vercel.app/image-splitter)               | Split images into a downloadable tile grid     |
+| [Image Stitcher](https://tool-boxy.vercel.app/image-stitcher)               | Combine multiple images into one               |
+| [Base64 Image Encoder](https://tool-boxy.vercel.app/base64-image-encoder)   | Embed images as Base64 for CSS/HTML            |
+| [Favicon Generator](https://tool-boxy.vercel.app/favicon-generator)         | Favicon sizes + HTML snippets                  |
+| [QR Code Generator](https://tool-boxy.vercel.app/qr-code-generator)         | Customisable QR codes from URL or text         |
+| [SVG Viewer](https://tool-boxy.vercel.app/svg-viewer)                       | Paste SVG and preview with zoom                |
+| [ASCII Art Generator](https://tool-boxy.vercel.app/ascii-art-generator)     | Convert images into ASCII art                  |
+| [Post Composer](https://tool-boxy.vercel.app/post-composer)                 | Design social posts with text, shapes & images |
 
 ### 💻 Developer
 
-| Tool | Description |
-|:-----|:------------|
-| [Code Snippet](https://tool-boxy.vercel.app/code-snippet) | Create and export styled code screenshots |
-| [Document Annotator](https://tool-boxy.vercel.app/document-annotator) | Annotate PDFs & images (shapes, text, redactions) |
-| [HTML Viewer](https://tool-boxy.vercel.app/html-viewer) | Live HTML preview with Tailwind & CSS |
-| [Markdown Live Preview](https://tool-boxy.vercel.app/markdown-live-preview) | Write markdown and preview side by side |
-| [JSON Viewer](https://tool-boxy.vercel.app/json-viewer) | Edit, search & explore JSON (tree + raw) |
-| [CSV Viewer](https://tool-boxy.vercel.app/csv-viewer) | Search, sort, filter & export CSV tables |
-| [Code Viewer](https://tool-boxy.vercel.app/code-viewer) | Local folder audit · grep · TODOs · insights |
-| [PDF Viewer](https://tool-boxy.vercel.app/pdf-viewer) | Preview, zoom, rotate & navigate PDFs |
-| [Meta Tag Generator](https://tool-boxy.vercel.app/meta-tag-generator) | SEO & social sharing meta tags |
+| Tool                                                                        | Description                                       |
+| :-------------------------------------------------------------------------- | :------------------------------------------------ |
+| [Code Snippet](https://tool-boxy.vercel.app/code-snippet)                   | Create and export styled code screenshots         |
+| [Document Annotator](https://tool-boxy.vercel.app/image-annotator)          | Annotate PDFs & images (shapes, text, redactions) |
+| [HTML Viewer](https://tool-boxy.vercel.app/html-viewer)                     | Live HTML preview with Tailwind & CSS             |
+| [Markdown Live Preview](https://tool-boxy.vercel.app/markdown-live-preview) | Write markdown and preview side by side           |
+| [JSON Viewer](https://tool-boxy.vercel.app/json-viewer)                     | Edit, search & explore JSON (tree + raw)          |
+| [CSV Viewer](https://tool-boxy.vercel.app/csv-viewer)                       | Search, sort, filter & export CSV tables          |
+| [Code Viewer](https://tool-boxy.vercel.app/code-viewer)                     | Local folder audit · grep · TODOs · insights      |
+| [PDF Toolkit](https://tool-boxy.vercel.app/pdf-toolkit)                     | Preview, merge, split, organize, and convert PDFs |
+| [Meta Tag Generator](https://tool-boxy.vercel.app/meta-tag-generator)       | SEO & social sharing meta tags                    |
 
 ### ✍️ Text
 
-| Tool | Description |
-|:-----|:------------|
-| [Word Counter](https://tool-boxy.vercel.app/word-counter) | Count words, characters and more |
+| Tool                                                                        | Description                            |
+| :-------------------------------------------------------------------------- | :------------------------------------- |
+| [Word Counter](https://tool-boxy.vercel.app/word-counter)                   | Count words, characters and more       |
 | [Lorem Ipsum Generator](https://tool-boxy.vercel.app/lorem-ipsum-generator) | Placeholder paragraphs (plain or HTML) |
-| [Typography Calculator](https://tool-boxy.vercel.app/typography-calculator) | Convert between typographic units |
-| [Glyph Browser](https://tool-boxy.vercel.app/glyph-browser) | Browse Unicode glyphs by block |
-| [World Scripts](https://tool-boxy.vercel.app/world-scripts) | Explore alphabets & writing systems |
+| [Typography Calculator](https://tool-boxy.vercel.app/typography-calculator) | Convert between typographic units      |
+| [Glyph Browser](https://tool-boxy.vercel.app/glyph-browser)                 | Browse Unicode glyphs by block         |
+| [World Scripts](https://tool-boxy.vercel.app/world-scripts)                 | Explore alphabets & writing systems    |
 
 ### 🔄 Converters
 
-| Tool | Description |
-|:-----|:------------|
-| [Unit Converter](https://tool-boxy.vercel.app/unit-converter) | Length, weight, area, data, temperature & more |
-| [Base Converter](https://tool-boxy.vercel.app/base-converter) | Decimal · hex · binary · octal + bitwise ops |
-| [Password Generator](https://tool-boxy.vercel.app/password-generator) | Strong random passwords with options |
-| [UUID Generator](https://tool-boxy.vercel.app/uuid-generator) | UUID v4 & v7 — including bulk lists |
-| [JWT Decoder](https://tool-boxy.vercel.app/jwt-decoder) | Inspect header, payload & signature |
+| Tool                                                                  | Description                                    |
+| :-------------------------------------------------------------------- | :--------------------------------------------- |
+| [Unit Converter](https://tool-boxy.vercel.app/unit-converter)         | Length, weight, area, data, temperature & more |
+| [Base Converter](https://tool-boxy.vercel.app/base-converter)         | Decimal · hex · binary · octal + bitwise ops   |
+| [Password Generator](https://tool-boxy.vercel.app/password-generator) | Strong random passwords with options           |
+| [UUID Generator](https://tool-boxy.vercel.app/uuid-generator)         | UUID v4 & v7 — including bulk lists            |
+| [JWT Decoder](https://tool-boxy.vercel.app/jwt-decoder)               | Inspect header, payload & signature            |
 
 ---
 
 ## 🧱 Tech Stack
 
-| Layer | Choice |
-|:------|:-------|
-| ⚛️ UI | React 19 + TypeScript |
-| ⚡ Build | Vite 8 |
-| 🧭 Routing | React Router |
-| 🎨 Styling | Tailwind CSS 4 + shadcn/ui |
-| 📦 State | Zustand |
-| 🧠 Compiler | React Compiler (Babel) |
-| 🧹 Quality | oxlint · Prettier |
+| Layer       | Choice                     |
+| :---------- | :------------------------- |
+| ⚛️ UI       | React 19 + TypeScript      |
+| ⚡ Build    | Vite 8                     |
+| 🧭 Routing  | React Router               |
+| 🎨 Styling  | Tailwind CSS 4 + shadcn/ui |
+| 📦 State    | Zustand                    |
+| 🧠 Compiler | React Compiler (Babel)     |
+| 🧹 Quality  | oxlint · Prettier          |
 
 ---
 
@@ -166,14 +167,14 @@ Then open the URL Vite prints — usually **http://localhost:5173** 🎉
 
 ### 📜 Scripts
 
-| Command | What it does |
-|:--------|:-------------|
-| `npm run dev` | 🔥 Start Vite dev server |
-| `npm run build` | 🏗️ Typecheck + production build |
-| `npm run preview` | 👀 Preview the production build |
-| `npm run lint` | 🔍 Lint with oxlint |
-| `npm run format` | ✨ Format with Prettier |
-| `npm run pre-commit` | ✅ Format → lint → build |
+| Command              | What it does                    |
+| :------------------- | :------------------------------ |
+| `npm run dev`        | 🔥 Start Vite dev server        |
+| `npm run build`      | 🏗️ Typecheck + production build |
+| `npm run preview`    | 👀 Preview the production build |
+| `npm run lint`       | 🔍 Lint with oxlint             |
+| `npm run format`     | ✨ Format with Prettier         |
+| `npm run pre-commit` | ✅ Format → lint → build        |
 
 ---
 
@@ -190,7 +191,8 @@ src/
 └── 📄 pages/          # Thin route pages that mount features
 ```
 
-Each tool lives under `src/features/<ToolName>/` with its own UI, store, and helpers.
+Each tool lives under `src/features/<ToolName>/` with its own UI, store, and
+helpers.
 
 - Routes → `src/App.tsx`
 - Catalog → `src/config/tools.ts`
@@ -241,6 +243,8 @@ Copyright © 2026 Ravi Teja
 
 ⭐ Star the repo if Tool Boxy saves you a tab or two!
 
-[🌐 Live Demo](https://tool-boxy.vercel.app) · [🐛 Report Bug](https://github.com/tool-boxy/tool-boxy/issues) · [💡 Request Feature](https://github.com/tool-boxy/tool-boxy/issues)
+[🌐 Live Demo](https://tool-boxy.vercel.app) ·
+[🐛 Report Bug](https://github.com/tool-boxy/tool-boxy/issues) ·
+[💡 Request Feature](https://github.com/tool-boxy/tool-boxy/issues)
 
 </div>
