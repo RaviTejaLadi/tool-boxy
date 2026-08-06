@@ -10,9 +10,10 @@ export type Tool =
   | 'highlight'
   | 'callout'
   | 'redact'
+  | 'mask'
   | 'eraser';
 
-export type ShapeType = 'rect' | 'ellipse' | 'highlight' | 'redact';
+export type ShapeType = 'rect' | 'ellipse' | 'highlight' | 'redact' | 'mask';
 export type PathType = 'line' | 'arrow' | 'pen';
 export type ExportFormat = 'png' | 'jpeg' | 'webp' | 'pdf';
 export type SourceKind = 'image' | 'pdf';

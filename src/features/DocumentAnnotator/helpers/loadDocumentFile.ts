@@ -5,6 +5,7 @@ import type { DocumentMeta, ExportFormat, SourceKind } from '../types';
 export type LoadedDocument = {
   image: HTMLImageElement;
   meta: DocumentMeta;
+  pdfFile?: File;
   pdfData?: ArrayBuffer;
   numPages?: number;
 };
@@ -21,6 +22,7 @@ export async function readDocumentFile(file: File): Promise<LoadedDocument | nul
     const base = file.name.replace(/\.[^.]+$/, '') || 'document';
     return {
       image,
+      pdfFile: file,
       pdfData,
       numPages,
       meta: {

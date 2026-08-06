@@ -2,7 +2,7 @@ import { calloutRadius, distToSegment, norm, textMetrics } from './geometry';
 import type { Annotation, Point } from '../types';
 
 export function hitTest(pt: Point, a: Annotation, pad: number): boolean {
-  if (a.type === 'rect' || a.type === 'highlight' || a.type === 'ellipse' || a.type === 'redact') {
+  if (a.type === 'rect' || a.type === 'highlight' || a.type === 'ellipse' || a.type === 'redact' || a.type === 'mask') {
     const r = norm(a.x, a.y, a.w, a.h);
     return pt.x >= r.x - pad && pt.x <= r.x + r.w + pad && pt.y >= r.y - pad && pt.y <= r.y + r.h + pad;
   }

@@ -239,7 +239,7 @@ export const tools: Tool[] = [
   {
     title: 'Document Annotator',
     description: 'Annotate PDFs and images with shapes, text, highlights, and redactions',
-    url: '/image-annotator',
+    url: '/document-annotator',
     category: 'Developer',
     icon: PenLine,
     featured: true,

@@ -11,11 +11,15 @@ export async function getPdfPageCount(data: ArrayBuffer): Promise<number> {
   return count;
 }
 
-export async function renderPdfPage(data: ArrayBuffer, pageNumber: number): Promise<HTMLImageElement> {
+export async function renderPdfPage(
+  data: ArrayBuffer,
+  pageNumber: number,
+  scale = PDF_RENDER_SCALE
+): Promise<HTMLImageElement> {
   const pdf = await pdfjs.getDocument({ data: data.slice(0) }).promise;
   try {
     const page = await pdf.getPage(pageNumber);
-    const viewport = page.getViewport({ scale: PDF_RENDER_SCALE });
+    const viewport = page.getViewport({ scale });
     const canvas = document.createElement('canvas');
     canvas.width = Math.floor(viewport.width);
     canvas.height = Math.floor(viewport.height);

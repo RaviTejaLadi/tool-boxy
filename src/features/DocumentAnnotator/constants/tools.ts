@@ -39,7 +39,8 @@ export const SHAPES: ToolDef[] = [
   { value: 'arrow', label: 'Arrow', shortcut: 'A', icon: MoveUpRight },
   { value: 'highlight', label: 'Highlight', shortcut: 'G', icon: Highlighter },
   { value: 'callout', label: 'Callout', shortcut: 'N', icon: Hash },
-  { value: 'redact', label: 'Redact', shortcut: 'X', icon: EyeOff },
+  { value: 'redact', label: 'Redact (Pixelate)', shortcut: 'X', icon: EyeOff },
+  { value: 'mask', label: 'Black Mask', shortcut: 'B', icon: Square },
 ];
 
 export const ALL_TOOLS: ToolDef[] = [...TOOLS, ...SHAPES];
@@ -57,4 +58,5 @@ export const TOOL_SHORTCUTS: Record<string, Tool> = {
   e: 'eraser',
   n: 'callout',
   x: 'redact',
+  b: 'mask',
 };

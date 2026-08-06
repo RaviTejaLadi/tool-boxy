@@ -5,7 +5,7 @@ const ROWS = [
   ['P / T / E', 'Pen / Text / Eraser'],
   ['R / O', 'Rect / Ellipse'],
   ['L / A', 'Line / Arrow'],
-  ['G / N / X', 'Highlight / Callout / Redact'],
+  ['G / N / X / B', 'Highlight / Callout / Redact / Black Mask'],
   ['Space', 'Hold to pan'],
   ['Del', 'Delete selection'],
   ['Ctrl+D', 'Duplicate'],

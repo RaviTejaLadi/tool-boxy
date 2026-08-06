@@ -79,7 +79,9 @@ export default function DocumentAnnotator() {
         loadDocument(
           loaded.image,
           loaded.meta,
-          loaded.pdfData && loaded.numPages ? { data: loaded.pdfData, numPages: loaded.numPages } : undefined
+          loaded.pdfData && loaded.numPages && loaded.pdfFile
+            ? { file: loaded.pdfFile, data: loaded.pdfData, numPages: loaded.numPages }
+            : undefined
         );
       })
       .catch(() => setLoading(false));

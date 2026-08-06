@@ -27,7 +27,7 @@ export function InfoSection() {
             {image.naturalWidth} × {image.naturalHeight}
           </dd>
         </div>
-        {sourceKind === 'pdf' && (
+        {sourceKind === 'pdf' && numPages > 1 && (
           <div className="flex justify-between gap-3">
             <dt>Page</dt>
             <dd className="text-foreground">

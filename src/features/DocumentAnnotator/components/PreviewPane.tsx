@@ -13,6 +13,7 @@ import { ImageOff, Upload } from 'lucide-react';
 import { HANDLE_PX, HIT_PAD_PX, MAX_ZOOM, MIN_ZOOM, TOOL_SHORTCUTS } from '../constants';
 import { boundsOf, clamp, drawAnnotation, hitTest, norm, readDocumentFile, uid } from '../helpers';
 import { useAnnotatorStore, selectAnnotations } from '../stores';
+import { PdfPreviewPane } from './PdfPreviewPane';
 import type {
   Annotation,
   CalloutAnnotation,
@@ -34,6 +35,8 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
   const textAreaRef = useRef<HTMLTextAreaElement>(null);
 
   const image = useAnnotatorStore((s) => s.image);
+  const sourceKind = useAnnotatorStore((s) => s.sourceKind);
+  const pdfFile = useAnnotatorStore((s) => s.pdfFile);
   const annotations = useAnnotatorStore(selectAnnotations);
   const tool = useAnnotatorStore((s) => s.tool);
   const color = useAnnotatorStore((s) => s.color);
@@ -85,7 +88,9 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
           loadDocument(
             loaded.image,
             loaded.meta,
-            loaded.pdfData && loaded.numPages ? { data: loaded.pdfData, numPages: loaded.numPages } : undefined
+            loaded.pdfData && loaded.numPages && loaded.pdfFile
+              ? { file: loaded.pdfFile, data: loaded.pdfData, numPages: loaded.numPages }
+              : undefined
           );
         })
         .catch(() => setLoading(false));
@@ -129,7 +134,7 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
       textAreaRef.current?.select();
     });
     return () => window.cancelAnimationFrame(id);
-  }, [textEdit?.id, textEdit?.x, textEdit?.y]);
+  }, [textEdit]);
 
   const baseScale = useMemo(() => {
     if (!image || containerSize.w === 0 || containerSize.h === 0) return 1;
@@ -249,7 +254,8 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
         selected.type === 'rect' ||
         selected.type === 'highlight' ||
         selected.type === 'ellipse' ||
-        selected.type === 'redact'
+        selected.type === 'redact' ||
+        selected.type === 'mask'
       ) {
         drawHandle(b.x, b.y);
         drawHandle(b.x + b.w, b.y);
@@ -283,7 +289,13 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
       const b = boundsOf(a);
       const near = (hx: number, hy: number) =>
         Math.abs(pt.x - hx) <= handleSizeImg && Math.abs(pt.y - hy) <= handleSizeImg;
-      if (a.type === 'rect' || a.type === 'highlight' || a.type === 'ellipse' || a.type === 'redact') {
+      if (
+        a.type === 'rect' ||
+        a.type === 'highlight' ||
+        a.type === 'ellipse' ||
+        a.type === 'redact' ||
+        a.type === 'mask'
+      ) {
         if (near(b.x, b.y)) return 'tl';
         if (near(b.x + b.w, b.y)) return 'tr';
         if (near(b.x, b.y + b.h)) return 'bl';
@@ -415,7 +427,7 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
     const base = { id: uid(), ...styleBase };
     if (tool === 'rect' || tool === 'ellipse') {
       setDraft({ ...base, type: tool, x: pt.x, y: pt.y, w: 0, h: 0, filled });
-    } else if (tool === 'highlight' || tool === 'redact') {
+    } else if (tool === 'highlight' || tool === 'redact' || tool === 'mask') {
       setDraft({ ...base, type: tool, x: pt.x, y: pt.y, w: 0, h: 0, filled: true });
     } else if (tool === 'line' || tool === 'arrow') {
       setDraft({ ...base, type: tool, points: [pt, pt] });
@@ -450,7 +462,13 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
         const dx = pt.x - dragState.startImg.x;
         const dy = pt.y - dragState.startImg.y;
         let updated: Annotation;
-        if (orig.type === 'rect' || orig.type === 'highlight' || orig.type === 'ellipse' || orig.type === 'redact') {
+        if (
+          orig.type === 'rect' ||
+          orig.type === 'highlight' ||
+          orig.type === 'ellipse' ||
+          orig.type === 'redact' ||
+          orig.type === 'mask'
+        ) {
           updated = { ...orig, x: orig.x + dx, y: orig.y + dy };
         } else if (orig.type === 'line' || orig.type === 'arrow' || orig.type === 'pen') {
           updated = { ...orig, points: orig.points.map((p) => ({ x: p.x + dx, y: p.y + dy })) };
@@ -496,7 +514,13 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
     }
 
     if (draft) {
-      if (draft.type === 'rect' || draft.type === 'ellipse' || draft.type === 'highlight' || draft.type === 'redact') {
+      if (
+        draft.type === 'rect' ||
+        draft.type === 'ellipse' ||
+        draft.type === 'highlight' ||
+        draft.type === 'redact' ||
+        draft.type === 'mask'
+      ) {
         setDraft({ ...draft, w: pt.x - draft.x, h: pt.y - draft.y });
       } else if (draft.type === 'line' || draft.type === 'arrow') {
         setDraft({ ...draft, points: [draft.points[0], pt] });
@@ -524,7 +548,11 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
     }
     if (draft) {
       const isDegenerate =
-        (draft.type === 'rect' || draft.type === 'ellipse' || draft.type === 'highlight' || draft.type === 'redact') &&
+        (draft.type === 'rect' ||
+          draft.type === 'ellipse' ||
+          draft.type === 'highlight' ||
+          draft.type === 'redact' ||
+          draft.type === 'mask') &&
         Math.abs(draft.w) < 2 &&
         Math.abs(draft.h) < 2;
       const isDegeneratePath =
@@ -546,6 +574,7 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
   };
 
   useEffect(() => {
+    if (sourceKind === 'pdf') return;
     const onKeyDown = (e: KeyboardEvent) => {
       if (isTypingTarget(e.target)) return;
       if (e.code === 'Space') {
@@ -612,6 +641,7 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
     setSelectedId,
     setShowShortcuts,
     setTool,
+    sourceKind,
     undo,
     zoomAt,
   ]);
@@ -640,6 +670,10 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
   const editColor = textEdit?.id
     ? (annotations.find((a) => a.id === textEdit.id) as TextAnnotation | undefined)?.color
     : color;
+
+  if (sourceKind === 'pdf' && pdfFile) {
+    return <PdfPreviewPane fileInputRef={fileInputRef} />;
+  }
 
   return (
     <div
@@ -700,7 +734,7 @@ export function PreviewPane({ fileInputRef }: { fileInputRef: RefObject<HTMLInpu
               {isLoading ? 'Loading document…' : 'Drop a PDF or image, click to browse, or paste'}
             </p>
             <p className="mt-1 font-mono text-[11px] text-muted-foreground">
-              PDF · PNG · JPG · WEBP — annotate page by page in the browser
+              PDF · PNG · JPG · WEBP — annotate all pages in the browser
             </p>
           </div>
         </button>

@@ -99,7 +99,7 @@ export async function exportAnnotatedPdf(options: {
 
   if (sourceKind === 'pdf' && pdfData && numPages > 0) {
     for (let page = 1; page <= numPages; page++) {
-      const pageImage = page === pageNumber ? image : await renderPdfPage(pdfData, page);
+      const pageImage = await renderPdfPage(pdfData, page);
       const state = page === pageNumber ? { history, historyIndex, nextCallout: 1 } : pageStates[page];
       const marks = state?.history[state.historyIndex] ?? (page === pageNumber ? annotations : []);
       const canvas = renderAnnotatedCanvas(pageImage, marks, { fillWhite: true });

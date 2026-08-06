@@ -4,11 +4,11 @@ import { Switch } from '@/components/ui/switch';
 import { Field, FieldContent, FieldLabel } from '@/components/ui/field';
 import { parseSliderValue } from '@/lib/utils';
 import { COLORS } from '../constants';
-import { useAnnotatorStore, selectAnnotations } from '../stores';
+import { useAnnotatorStore, selectAnnotations, selectHasDocument } from '../stores';
 import { SectionHeading } from './SectionHeading';
 
 export function StyleSection() {
-  const image = useAnnotatorStore((s) => s.image);
+  const hasDocument = useAnnotatorStore(selectHasDocument);
   const tool = useAnnotatorStore((s) => s.tool);
   const color = useAnnotatorStore((s) => s.color);
   const strokeWidth = useAnnotatorStore((s) => s.strokeWidth);
@@ -80,7 +80,7 @@ export function StyleSection() {
             <button
               key={c}
               type="button"
-              disabled={!image}
+              disabled={!hasDocument}
               onClick={() => setColorValue(c)}
               aria-label={`Color ${c}`}
               className={`size-6 shrink-0 rounded-none border transition-transform hover:scale-105 disabled:opacity-40 ${
@@ -92,7 +92,7 @@ export function StyleSection() {
           <input
             type="color"
             value={activeColor}
-            disabled={!image}
+            disabled={!hasDocument}
             onChange={(e) => setColorValue(e.target.value)}
             className="size-6 cursor-pointer rounded-none border border-border bg-transparent disabled:opacity-40"
             title="Custom color"
@@ -113,7 +113,7 @@ export function StyleSection() {
             min={showFontSize ? 12 : 1}
             max={showFontSize ? 96 : 40}
             step={1}
-            disabled={!image}
+            disabled={!hasDocument}
             onValueChange={(v) =>
               showFontSize ? setFontSizeValue(parseSliderValue(v)) : setStrokeValue(parseSliderValue(v))
             }
@@ -132,7 +132,7 @@ export function StyleSection() {
             min={0.1}
             max={1}
             step={0.05}
-            disabled={!image}
+            disabled={!hasDocument}
             onValueChange={(v) => setOpacityValue(parseSliderValue(v))}
           />
         </FieldContent>
@@ -143,7 +143,7 @@ export function StyleSection() {
           <FieldLabel className="text-sm">Filled</FieldLabel>
           <Switch
             checked={activeFilled}
-            disabled={!image}
+            disabled={!hasDocument}
             onCheckedChange={(checked) => {
               setFilled(checked);
               if (selected && 'filled' in selected) applyStyleToSelected({ filled: checked });
@@ -157,7 +157,7 @@ export function StyleSection() {
           <FieldLabel className="text-sm">Dashed</FieldLabel>
           <Switch
             checked={activeDashed}
-            disabled={!image}
+            disabled={!hasDocument}
             onCheckedChange={(checked) => {
               setDashed(checked);
               if (selected) applyStyleToSelected({ dashed: checked });

@@ -59,6 +59,10 @@ export function drawAnnotation(ctx: CanvasRenderingContext2D, a: Annotation, ima
       ctx.fillStyle = '#0f172a';
       ctx.fillRect(r.x, r.y, r.w, r.h);
     }
+  } else if (a.type === 'mask') {
+    const r = norm(a.x, a.y, a.w, a.h);
+    ctx.fillStyle = '#000000';
+    ctx.fillRect(r.x, r.y, r.w, r.h);
   } else if (a.type === 'ellipse') {
     const r = norm(a.x, a.y, a.w, a.h);
     applyStrokeStyle(ctx, a);

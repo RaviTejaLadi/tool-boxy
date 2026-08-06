@@ -6,7 +6,7 @@ import {
   DEFAULT_OPACITY,
   DEFAULT_STROKE_WIDTH,
 } from '../constants';
-import { formatExtension, formatMime, renderPdfPage, uid } from '../helpers';
+import { formatExtension, formatMime, uid } from '../helpers';
 import type { Annotation, DocumentMeta, ExportFormat, PageState, Point, SourceKind, Tool } from '../types';
 
 export interface AnnotatorState {
@@ -16,6 +16,7 @@ export interface AnnotatorState {
   exportFormat: ExportFormat;
   exportQuality: number;
   sourceKind: SourceKind | null;
+  pdfFile: File | null;
   pdfData: ArrayBuffer | null;
   pageNumber: number;
   numPages: number;
@@ -37,9 +38,14 @@ export interface AnnotatorState {
   showShortcuts: boolean;
   confirmClear: boolean;
 
-  loadDocument: (image: HTMLImageElement, meta: DocumentMeta, pdf?: { data: ArrayBuffer; numPages: number }) => void;
+  loadDocument: (
+    image: HTMLImageElement,
+    meta: DocumentMeta,
+    pdf?: { file: File; data: ArrayBuffer; numPages: number }
+  ) => void;
   clearDocument: () => void;
   setPage: (pageNumber: number) => Promise<void>;
+  setNumPages: (numPages: number) => void;
   setLoading: (isLoading: boolean) => void;
   commit: (next: Annotation[]) => void;
   undo: () => void;
@@ -96,6 +102,7 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
   exportFormat: 'png',
   exportQuality: DEFAULT_EXPORT_QUALITY,
   sourceKind: null,
+  pdfFile: null,
   pdfData: null,
   pageNumber: 1,
   numPages: 1,
@@ -124,6 +131,7 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
       mimeType: meta.mimeType,
       exportFormat: meta.format,
       sourceKind: meta.sourceKind,
+      pdfFile: pdf?.file ?? null,
       pdfData: pdf?.data ?? null,
       pageNumber: 1,
       numPages: pdf?.numPages ?? 1,
@@ -146,6 +154,7 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
       mimeType: 'image/png',
       exportFormat: 'png',
       sourceKind: null,
+      pdfFile: null,
       pdfData: null,
       pageNumber: 1,
       numPages: 1,
@@ -167,24 +176,26 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
     const pageStates = { ...s.pageStates, [s.pageNumber]: snapshotPage(s) };
     const nextPage = pageStates[pageNumber] ?? emptyPageState();
 
-    set({ isLoading: true, selectedId: null });
-    try {
-      const image = await renderPdfPage(s.pdfData, pageNumber);
-      set({
-        image,
-        pageNumber,
-        pageStates,
-        history: nextPage.history,
-        historyIndex: nextPage.historyIndex,
-        nextCallout: nextPage.nextCallout,
-        zoom: 1,
-        pan: { x: 0, y: 0 },
-        isLoading: false,
-      });
-    } catch {
-      set({ isLoading: false });
-    }
+    set({
+      pageNumber,
+      pageStates,
+      history: nextPage.history,
+      historyIndex: nextPage.historyIndex,
+      nextCallout: nextPage.nextCallout,
+      selectedId: null,
+      confirmClear: false,
+    });
   },
+
+  setNumPages: (numPages) =>
+    set((s) => {
+      const nextTotal = Math.max(1, Math.floor(numPages) || 1);
+      const nextPage = Math.min(Math.max(s.pageNumber, 1), nextTotal);
+      return {
+        numPages: nextTotal,
+        pageNumber: nextPage,
+      };
+    }),
 
   setLoading: (isLoading) => set({ isLoading }),
 
@@ -277,7 +288,8 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
       selected.type === 'rect' ||
       selected.type === 'ellipse' ||
       selected.type === 'highlight' ||
-      selected.type === 'redact'
+      selected.type === 'redact' ||
+      selected.type === 'mask'
     ) {
       copy = { ...selected, id: uid(), x: selected.x + offset, y: selected.y + offset };
     } else if (selected.type === 'line' || selected.type === 'arrow' || selected.type === 'pen') {
@@ -325,4 +337,4 @@ export const useAnnotatorStore = create<AnnotatorState>((set, get) => ({
 export const selectAnnotations = (s: AnnotatorState) => s.history[s.historyIndex] ?? [];
 export const selectCanUndo = (s: AnnotatorState) => s.historyIndex > 0;
 export const selectCanRedo = (s: AnnotatorState) => s.historyIndex < s.history.length - 1;
-export const selectHasDocument = (s: AnnotatorState) => Boolean(s.image);
+export const selectHasDocument = (s: AnnotatorState) => Boolean(s.image || s.pdfFile);

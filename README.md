@@ -97,7 +97,7 @@ fast, frictionless answers without opening a dozen browser tabs. 🚀
 | Tool                                                                        | Description                                       |
 | :-------------------------------------------------------------------------- | :------------------------------------------------ |
 | [Code Snippet](https://tool-boxy.vercel.app/code-snippet)                   | Create and export styled code screenshots         |
-| [Document Annotator](https://tool-boxy.vercel.app/image-annotator)          | Annotate PDFs & images (shapes, text, redactions) |
+| [Document Annotator](https://tool-boxy.vercel.app/document-annotator)       | Annotate PDFs & images (shapes, text, redactions) |
 | [HTML Viewer](https://tool-boxy.vercel.app/html-viewer)                     | Live HTML preview with Tailwind & CSS             |
 | [Markdown Live Preview](https://tool-boxy.vercel.app/markdown-live-preview) | Write markdown and preview side by side           |
 | [JSON Viewer](https://tool-boxy.vercel.app/json-viewer)                     | Edit, search & explore JSON (tree + raw)          |

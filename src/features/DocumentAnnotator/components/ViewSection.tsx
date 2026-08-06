@@ -6,11 +6,11 @@ import { Slider } from '@/components/ui/slider';
 import { parseSliderValue } from '@/lib/utils';
 import { MAX_ZOOM, MIN_ZOOM } from '../constants';
 import { clamp } from '../helpers';
-import { useAnnotatorStore } from '../stores';
+import { useAnnotatorStore, selectHasDocument } from '../stores';
 import { SectionHeading } from './SectionHeading';
 
 export function ViewSection() {
-  const image = useAnnotatorStore((s) => s.image);
+  const hasDocument = useAnnotatorStore(selectHasDocument);
   const zoom = useAnnotatorStore((s) => s.zoom);
   const setZoom = useAnnotatorStore((s) => s.setZoom);
   const fitToScreen = useAnnotatorStore((s) => s.fitToScreen);
@@ -30,7 +30,7 @@ export function ViewSection() {
             min={MIN_ZOOM}
             max={MAX_ZOOM}
             step={0.05}
-            disabled={!image}
+            disabled={!hasDocument}
             onValueChange={(v) => setZoom(clamp(parseSliderValue(v), MIN_ZOOM, MAX_ZOOM))}
           />
         </FieldContent>
@@ -42,7 +42,7 @@ export function ViewSection() {
           variant="outline"
           size="sm"
           className="flex-1"
-          disabled={!image}
+          disabled={!hasDocument}
           onClick={() => setZoom((z) => clamp(z * 0.85, MIN_ZOOM, MAX_ZOOM))}
         >
           <ZoomOut data-icon="inline-start" />
@@ -53,13 +53,20 @@ export function ViewSection() {
           variant="outline"
           size="sm"
           className="flex-1"
-          disabled={!image}
+          disabled={!hasDocument}
           onClick={() => setZoom((z) => clamp(z * 1.18, MIN_ZOOM, MAX_ZOOM))}
         >
           <ZoomIn data-icon="inline-start" />
           In
         </Button>
-        <Button type="button" variant="outline" size="sm" className="flex-1" disabled={!image} onClick={fitToScreen}>
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          className="flex-1"
+          disabled={!hasDocument}
+          onClick={fitToScreen}
+        >
           <Maximize2 data-icon="inline-start" />
           Fit
         </Button>

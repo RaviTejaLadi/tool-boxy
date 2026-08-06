@@ -33,7 +33,7 @@ export function calloutRadius(a: CalloutAnnotation) {
 }
 
 export function boundsOf(a: Annotation): Bounds {
-  if (a.type === 'rect' || a.type === 'highlight' || a.type === 'ellipse' || a.type === 'redact') {
+  if (a.type === 'rect' || a.type === 'highlight' || a.type === 'ellipse' || a.type === 'redact' || a.type === 'mask') {
     return norm(a.x, a.y, a.w, a.h);
   }
   if (a.type === 'line' || a.type === 'arrow') {
