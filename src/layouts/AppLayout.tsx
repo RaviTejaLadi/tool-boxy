@@ -1,9 +1,10 @@
-import { Home } from 'lucide-react';
+import { Home, PanelRightClose, PanelRightOpen } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { ModeToggle } from '@/components/theme/mode-toggle';
-import { buttonVariants } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { tools } from '@/config/tools';
@@ -13,9 +14,43 @@ import { cn } from '@/lib/utils';
 
 const navTitle = (title: string) => (title === 'Tailwind Shade Generator' ? 'Tailwind Shades' : title);
 
+const routesWithFeatureSidebar = new Set([
+  '/ascii-art-generator',
+  '/animation-generator',
+  '/base-converter',
+  '/base64-image-encoder',
+  '/border-radius-generator',
+  '/code-snippet',
+  '/code-viewer',
+  '/colour-converter',
+  '/contrast-checker',
+  '/csv-viewer',
+  '/document-annotator',
+  '/favicon-generator',
+  '/glassmorphism-generator',
+  '/glyph-browser',
+  '/gradient-generator',
+  '/image-converter',
+  '/image-splitter',
+  '/image-stitcher',
+  '/jwt-decoder',
+  '/lorem-ipsum-generator',
+  '/meta-tag-generator',
+  '/password-generator',
+  '/pdf-toolkit',
+  '/placeholder-generator',
+  '/post-composer',
+  '/qr-code-generator',
+  '/uuid-generator',
+  '/word-counter',
+  '/world-scripts',
+]);
+
 export default function AppLayout() {
   const { pathname } = useLocation();
   const { favorites } = useToolFavorites();
+  const [showFeatureSidebar, setShowFeatureSidebar] = useState(true);
+  const hasFeatureSidebar = routesWithFeatureSidebar.has(pathname);
 
   const favoriteRoutes = favorites
     .slice(0, 3)
@@ -70,6 +105,10 @@ export default function AppLayout() {
     pathname === '/animation-generator' ||
     pathname === '/flex-patterns';
 
+  useEffect(() => {
+    setShowFeatureSidebar(true);
+  }, [pathname]);
+
   return (
     <SidebarProvider className={isFullBleed ? 'h-svh overflow-hidden' : undefined}>
       <AppSidebar />
@@ -101,11 +140,31 @@ export default function AppLayout() {
               })}
             </nav>
           </div>
-          <div className="pr-4">
+          <div className="flex items-center gap-2 pr-4">
+            {hasFeatureSidebar && (
+              <Button variant="outline" size="sm" onClick={() => setShowFeatureSidebar((value) => !value)}>
+                {showFeatureSidebar ? (
+                  <PanelRightClose data-icon="inline-start" className="size-4" />
+                ) : (
+                  <PanelRightOpen data-icon="inline-start" className="size-4" />
+                )}
+                {showFeatureSidebar ? 'Hide Tools' : 'Show Tools'}
+              </Button>
+            )}
             <ModeToggle />
           </div>
         </header>
-        <div className={cn('flex flex-1 flex-col', isFullBleed ? 'min-h-0 overflow-hidden' : 'gap-4 p-4 pt-0')}>
+        <div
+          className={cn(
+            'flex flex-1 flex-col',
+            isFullBleed ? 'min-h-0 overflow-hidden' : 'gap-4 p-4 pt-0',
+            hasFeatureSidebar &&
+              '[&_aside]:overflow-hidden [&_aside]:transition-[width,max-height,opacity,border-color] [&_aside]:duration-300 [&_aside]:ease-out motion-reduce:[&_aside]:transition-none',
+            hasFeatureSidebar &&
+              !showFeatureSidebar &&
+              '[&_aside]:pointer-events-none [&_aside]:opacity-0 [&_aside]:max-h-0 [&_aside]:border-transparent lg:[&_aside]:max-h-none lg:[&_aside]:w-0! xl:[&_aside]:w-0!'
+          )}
+        >
           <ErrorBoundary>
             <Outlet />
           </ErrorBoundary>

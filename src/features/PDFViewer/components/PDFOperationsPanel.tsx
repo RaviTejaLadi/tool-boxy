@@ -102,7 +102,7 @@ function toErrorMessage(error: unknown): string {
   return 'Something went wrong while processing the PDF.';
 }
 
-export function PDFOperationsPanel({ onCollapse }: { onCollapse: () => void }) {
+export function PDFOperationsPanel() {
   ensurePdfWorker();
 
   const file = useViewerStore((s) => s.file);
@@ -343,17 +343,11 @@ export function PDFOperationsPanel({ onCollapse }: { onCollapse: () => void }) {
       <ScrollArea className="h-full w-full">
         <div className="space-y-5 p-4 lg:p-5">
           <header className="space-y-1">
-            <div className="flex items-start justify-between gap-2">
-              <div className="space-y-1">
-                <h2 className="font-heading text-base font-semibold">PDF Toolkit</h2>
-                <p className="font-mono text-[11px] text-muted-foreground">
-                  Production-style, offline workflow for merge, split, organize, and convert.
-                </p>
-              </div>
-              <Button type="button" variant="ghost" size="sm" onClick={onCollapse}>
-                <X data-icon="inline-start" />
-                Hide
-              </Button>
+            <div className="space-y-1">
+              <h2 className="font-heading text-base font-semibold">PDF Toolkit</h2>
+              <p className="font-mono text-[11px] text-muted-foreground">
+                Production-style, offline workflow for merge, split, organize, and convert.
+              </p>
             </div>
           </header>
 

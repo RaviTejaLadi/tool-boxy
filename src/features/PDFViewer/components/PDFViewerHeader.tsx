@@ -1,14 +1,8 @@
-import { FileType, PanelRightClose, PanelRightOpen, Trash2 } from 'lucide-react';
+import { FileType, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useViewerStore } from '../stores';
 
-export function PDFViewerHeader({
-  showOperationsPanel,
-  onToggleOperationsPanel,
-}: {
-  showOperationsPanel: boolean;
-  onToggleOperationsPanel: () => void;
-}) {
+export function PDFViewerHeader() {
   const file = useViewerStore((s) => s.file);
   const clearAll = useViewerStore((s) => s.clearAll);
 
@@ -27,14 +21,6 @@ export function PDFViewerHeader({
       </div>
 
       <div className="flex items-center gap-1.5">
-        <Button variant="outline" size="sm" onClick={onToggleOperationsPanel}>
-          {showOperationsPanel ? (
-            <PanelRightClose data-icon="inline-start" />
-          ) : (
-            <PanelRightOpen data-icon="inline-start" />
-          )}
-          {showOperationsPanel ? 'Hide Tools' : 'Show Tools'}
-        </Button>
         <Button variant="outline" size="sm" onClick={clearAll} disabled={!file}>
           <Trash2 data-icon="inline-start" />
           Clear
