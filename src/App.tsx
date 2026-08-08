@@ -14,6 +14,7 @@ import FaviconGeneratorPage from './pages/FaviconGeneratorPage';
 import ImageConverterPage from './pages/ImageConverterPage';
 import ImageSplitterPage from './pages/ImageSplitterPage';
 import ImageStitcherPage from './pages/ImageStitcherPage';
+import ImageCropPage from './pages/ImageCropPage';
 import BaseConverterPage from './pages/BaseConverterPage';
 import UnitConverterPage from './pages/UnitConverterPage';
 import PDFViewerPage from './pages/PDFViewerPage';
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
       { path: 'image-converter', Component: ImageConverterPage },
       { path: 'image-splitter', Component: ImageSplitterPage },
       { path: 'image-stitcher', Component: ImageStitcherPage },
+      { path: 'image-crop', Component: ImageCropPage },
       { path: 'base-converter', Component: BaseConverterPage },
       { path: 'unit-converter', Component: UnitConverterPage },
       { path: 'pdf-toolkit', Component: PDFViewerPage },

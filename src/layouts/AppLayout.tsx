@@ -31,6 +31,7 @@ const routesWithFeatureSidebar = new Set([
   '/glyph-browser',
   '/gradient-generator',
   '/image-converter',
+  '/image-crop',
   '/image-splitter',
   '/image-stitcher',
   '/jwt-decoder',
@@ -76,6 +77,7 @@ export default function AppLayout() {
     pathname === '/base64-image-encoder' ||
     pathname === '/favicon-generator' ||
     pathname === '/image-converter' ||
+    pathname === '/image-crop' ||
     pathname === '/image-splitter' ||
     pathname === '/image-stitcher' ||
     pathname === '/base-converter' ||
