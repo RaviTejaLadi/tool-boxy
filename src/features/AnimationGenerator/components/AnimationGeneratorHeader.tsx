@@ -4,6 +4,7 @@ import { useAnimationGeneratorStore } from '../stores';
 
 export function AnimationGeneratorHeader() {
   const copied = useAnimationGeneratorStore((s) => s.copied);
+  const previewMode = useAnimationGeneratorStore((s) => s.previewMode);
   const copyCode = useAnimationGeneratorStore((s) => s.copyCode);
   const resetAll = useAnimationGeneratorStore((s) => s.resetAll);
 
@@ -16,7 +17,9 @@ export function AnimationGeneratorHeader() {
         <div>
           <div className="font-heading text-sm leading-none font-semibold">Animation Generator</div>
           <div className="mt-1 font-mono text-[11px] leading-none text-muted-foreground">
-            Design keyframe animations and copy CSS
+            {previewMode === 'text'
+              ? 'Canva-style text motion · live preview · copy-ready CSS'
+              : 'Shape keyframes · live preview · copy-ready CSS'}
           </div>
         </div>
       </div>

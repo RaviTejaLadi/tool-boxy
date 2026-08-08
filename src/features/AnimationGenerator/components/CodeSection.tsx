@@ -1,14 +1,23 @@
 import { useMemo } from 'react';
 import { SyntaxHighlight } from '@/components/SyntaxHighlight';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { buildCssText, buildHtmlText, getIterationValue, getTimingValue } from '../helpers';
+import {
+  buildCssText,
+  buildHtmlText,
+  buildTextCssText,
+  buildTextHtmlText,
+  getIterationValue,
+  getTimingValue,
+} from '../helpers';
 import { useAnimationGeneratorStore } from '../stores';
 import { SectionHeading } from './SectionHeading';
 
 export function CodeSection() {
   const codeTab = useAnimationGeneratorStore((s) => s.codeTab);
   const setCodeTab = useAnimationGeneratorStore((s) => s.setCodeTab);
+  const previewMode = useAnimationGeneratorStore((s) => s.previewMode);
   const animationType = useAnimationGeneratorStore((s) => s.animationType);
+  const textAnimationType = useAnimationGeneratorStore((s) => s.textAnimationType);
   const duration = useAnimationGeneratorStore((s) => s.duration);
   const delay = useAnimationGeneratorStore((s) => s.delay);
   const timingFunction = useAnimationGeneratorStore((s) => s.timingFunction);
@@ -17,22 +26,71 @@ export function CodeSection() {
   const iterationCustom = useAnimationGeneratorStore((s) => s.iterationCustom);
   const direction = useAnimationGeneratorStore((s) => s.direction);
   const fillMode = useAnimationGeneratorStore((s) => s.fillMode);
+  const textPhase = useAnimationGeneratorStore((s) => s.textPhase);
+  const textStagger = useAnimationGeneratorStore((s) => s.textStagger);
+  const textSegmentMode = useAnimationGeneratorStore((s) => s.textSegmentMode);
+  const textDirection = useAnimationGeneratorStore((s) => s.textDirection);
+  const previewText = useAnimationGeneratorStore((s) => s.previewText);
 
-  const cssText = useMemo(
-    () =>
-      buildCssText({
-        animationType,
+  const cssText = useMemo(() => {
+    const timingValue = getTimingValue(timingFunction, bezier);
+    const iterationValue = getIterationValue(iterationCount, iterationCustom);
+
+    if (previewMode === 'text') {
+      return buildTextCssText({
+        textAnimationType,
+        phase: textPhase,
         duration,
-        timingValue: getTimingValue(timingFunction, bezier),
+        timingValue,
         delay,
-        iterationValue: getIterationValue(iterationCount, iterationCustom),
+        iterationValue,
         direction,
         fillMode,
-      }),
-    [animationType, duration, delay, timingFunction, bezier, iterationCount, iterationCustom, direction, fillMode]
-  );
+        stagger: textStagger,
+        segmentMode: textSegmentMode,
+        textDirection,
+        previewText,
+      });
+    }
 
-  const htmlText = useMemo(() => buildHtmlText(animationType), [animationType]);
+    return buildCssText({
+      animationType,
+      duration,
+      timingValue,
+      delay,
+      iterationValue,
+      direction,
+      fillMode,
+    });
+  }, [
+    previewMode,
+    animationType,
+    textAnimationType,
+    duration,
+    delay,
+    timingFunction,
+    bezier,
+    iterationCount,
+    iterationCustom,
+    direction,
+    fillMode,
+    textPhase,
+    textStagger,
+    textSegmentMode,
+    textDirection,
+    previewText,
+  ]);
+
+  const htmlText = useMemo(() => {
+    if (previewMode === 'text') {
+      return buildTextHtmlText({
+        textAnimationType,
+        segmentMode: textSegmentMode,
+        previewText,
+      });
+    }
+    return buildHtmlText(animationType);
+  }, [previewMode, animationType, textAnimationType, textSegmentMode, previewText]);
 
   return (
     <section className="space-y-2">
@@ -47,7 +105,7 @@ export function CodeSection() {
             code={cssText}
             language="css"
             wrap
-            className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed"
+            className="max-h-56 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed"
           />
         </TabsContent>
         <TabsContent value="html" className="mt-2">
@@ -55,7 +113,7 @@ export function CodeSection() {
             code={htmlText}
             language="markup"
             wrap
-            className="max-h-48 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed"
+            className="max-h-56 overflow-auto border border-border bg-muted/40 p-3 font-mono text-[10px] leading-relaxed"
           />
         </TabsContent>
       </Tabs>

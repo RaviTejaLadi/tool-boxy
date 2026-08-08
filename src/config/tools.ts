@@ -114,7 +114,7 @@ export const tools: Tool[] = [
   },
   {
     title: 'Animation Generator',
-    description: 'Design CSS keyframe animations with live preview and copy-ready code',
+    description: 'Canva-style text & shape animations with live preview and copy-ready CSS',
     url: '/animation-generator',
     category: 'CSS',
     icon: Clapperboard,

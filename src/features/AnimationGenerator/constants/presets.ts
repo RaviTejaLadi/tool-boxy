@@ -1,20 +1,27 @@
 import type { AnimationType } from './animations';
+import type { TextAnimationType } from './textAnimations';
 
 export interface AnimationPreset {
   label: string;
   description: string;
-  type: AnimationType;
+  mode: 'shape' | 'text';
+  type?: AnimationType;
+  textType?: TextAnimationType;
   duration: number;
   timing: string;
   iteration: string;
   direction: string;
   fill: string;
+  stagger?: number;
+  segmentMode?: 'line' | 'word' | 'character';
+  phase?: 'enter' | 'exit' | 'both';
 }
 
 export const PRESETS: AnimationPreset[] = [
   {
     label: 'Fade In',
-    description: 'Simple entrance',
+    description: 'Simple shape entrance',
+    mode: 'shape',
     type: 'fadeIn',
     duration: 0.6,
     timing: 'ease-out',
@@ -24,7 +31,8 @@ export const PRESETS: AnimationPreset[] = [
   },
   {
     label: 'Slide Up Reveal',
-    description: 'Content entering from below',
+    description: 'Shape entering from below',
+    mode: 'shape',
     type: 'slideInUp',
     duration: 0.5,
     timing: 'ease-out',
@@ -35,6 +43,7 @@ export const PRESETS: AnimationPreset[] = [
   {
     label: 'Pop In',
     description: 'Playful overshoot scale',
+    mode: 'shape',
     type: 'scaleIn',
     duration: 0.45,
     timing: 'cubic-bezier(.34,1.56,.64,1)',
@@ -45,6 +54,7 @@ export const PRESETS: AnimationPreset[] = [
   {
     label: 'Loading Spinner',
     description: 'Continuous linear rotation',
+    mode: 'shape',
     type: 'rotate',
     duration: 1,
     timing: 'linear',
@@ -55,6 +65,7 @@ export const PRESETS: AnimationPreset[] = [
   {
     label: 'Attention Bounce',
     description: 'Draw the eye, looping',
+    mode: 'shape',
     type: 'bounce',
     duration: 1,
     timing: 'ease-in-out',
@@ -63,33 +74,101 @@ export const PRESETS: AnimationPreset[] = [
     fill: 'none',
   },
   {
-    label: 'Pulse Glow',
-    description: 'Gentle breathing loop',
-    type: 'pulse',
+    label: 'Typewriter Headline',
+    description: 'Canva-style letter reveal',
+    mode: 'text',
+    textType: 'typewriter',
+    duration: 0.05,
+    timing: 'steps(1, end)',
+    iteration: '1',
+    direction: 'normal',
+    fill: 'both',
+    stagger: 0.05,
+    segmentMode: 'character',
+    phase: 'enter',
+  },
+  {
+    label: 'Ascend Title',
+    description: 'Letters climb into place',
+    mode: 'text',
+    textType: 'ascend',
+    duration: 0.45,
+    timing: 'cubic-bezier(.22,1,.36,1)',
+    iteration: '1',
+    direction: 'normal',
+    fill: 'both',
+    stagger: 0.04,
+    segmentMode: 'character',
+    phase: 'enter',
+  },
+  {
+    label: 'Rise Soft',
+    description: 'Elegant whole-line rise',
+    mode: 'text',
+    textType: 'rise',
+    duration: 0.7,
+    timing: 'ease-out',
+    iteration: '1',
+    direction: 'normal',
+    fill: 'both',
+    stagger: 0,
+    segmentMode: 'line',
+    phase: 'enter',
+  },
+  {
+    label: 'Word Bounce',
+    description: 'Playful word-by-word bounce',
+    mode: 'text',
+    textType: 'bounce',
+    duration: 0.75,
+    timing: 'cubic-bezier(.34,1.56,.64,1)',
+    iteration: '1',
+    direction: 'normal',
+    fill: 'both',
+    stagger: 0.08,
+    segmentMode: 'word',
+    phase: 'enter',
+  },
+  {
+    label: 'Neon Glow',
+    description: 'Electric flicker loop',
+    mode: 'text',
+    textType: 'neon',
     duration: 1.4,
     timing: 'ease-in-out',
     iteration: 'infinite',
     direction: 'normal',
     fill: 'none',
+    stagger: 0,
+    segmentMode: 'line',
+    phase: 'enter',
   },
   {
-    label: 'Shake Error',
-    description: 'Form validation feedback',
-    type: 'shake',
-    duration: 0.5,
-    timing: 'ease-in-out',
-    iteration: '2',
-    direction: 'normal',
-    fill: 'none',
-  },
-  {
-    label: 'Card Flip',
-    description: 'Reveal the back face',
-    type: 'flip',
-    duration: 0.8,
-    timing: 'ease-in-out',
+    label: 'Stomp Impact',
+    description: 'Hard slam entrance',
+    mode: 'text',
+    textType: 'stomp',
+    duration: 0.45,
+    timing: 'cubic-bezier(.2,.9,.2,1)',
     iteration: '1',
     direction: 'normal',
     fill: 'both',
+    stagger: 0.08,
+    segmentMode: 'word',
+    phase: 'enter',
+  },
+  {
+    label: 'Burst Letters',
+    description: 'Explode then settle',
+    mode: 'text',
+    textType: 'burst',
+    duration: 0.7,
+    timing: 'cubic-bezier(.34,1.4,.64,1)',
+    iteration: '1',
+    direction: 'normal',
+    fill: 'both',
+    stagger: 0.03,
+    segmentMode: 'character',
+    phase: 'enter',
   },
 ];
