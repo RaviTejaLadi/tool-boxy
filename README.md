@@ -33,7 +33,7 @@ fast, frictionless answers without opening a dozen browser tabs. 🚀
 | -------------------- | ---------------------------------------------------------------- |
 | 🔒 **Privacy-first** | Everything runs in your browser — files never leave your machine |
 | ⚡ **Instant**       | Open a tool and go — no accounts, no waiting                     |
-| 🗂️ **Organized**     | Colour · CSS · Image · Developer · Text · Converters             |
+| 🗂️ **Organized**     | Colour · CSS · Image · Design · Documents · Code · Text · Utilities |
 | ⭐ **Favorites**     | Pin the tools you reach for most                                 |
 | 🌙 **Light & dark**  | Theme that follows you (or the system)                           |
 | 📱 **Responsive**    | Feels at home on desktop and mobile                              |
@@ -79,32 +79,44 @@ fast, frictionless answers without opening a dozen browser tabs. 🚀
 
 ### 🖼️ Image
 
+| Tool                                                                      | Description                                 |
+| :------------------------------------------------------------------------ | :------------------------------------------ |
+| [Image Converter](https://tool-boxy.vercel.app/image-converter)           | Convert PNG, JPEG, WebP and more            |
+| [Image Splitter](https://tool-boxy.vercel.app/image-splitter)             | Split images into a downloadable tile grid  |
+| [Image Stitcher](https://tool-boxy.vercel.app/image-stitcher)             | Combine multiple images into one            |
+| [Image Crop](https://tool-boxy.vercel.app/image-crop)                     | Crop with zoom, handles, and aspect ratios  |
+| [Image Filters](https://tool-boxy.vercel.app/image-filters)               | Instagram-style filters with intensity      |
+| [Base64 Image Encoder](https://tool-boxy.vercel.app/base64-image-encoder) | Embed images as Base64 for CSS/HTML         |
+| [ASCII Art Generator](https://tool-boxy.vercel.app/ascii-art-generator)   | Convert images into ASCII art               |
+
+### ✏️ Design
+
 | Tool                                                                        | Description                                    |
 | :-------------------------------------------------------------------------- | :--------------------------------------------- |
+| [Post Composer](https://tool-boxy.vercel.app/post-composer)                 | Design social posts with text, shapes & images |
+| [Code Snippet](https://tool-boxy.vercel.app/code-snippet)                   | Create and export styled code screenshots      |
 | [Placeholder Generator](https://tool-boxy.vercel.app/placeholder-generator) | Customisable placeholder images (PNG / SVG)    |
-| [Image Converter](https://tool-boxy.vercel.app/image-converter)             | Convert PNG, JPEG, WebP and more               |
-| [Image Splitter](https://tool-boxy.vercel.app/image-splitter)               | Split images into a downloadable tile grid     |
-| [Image Stitcher](https://tool-boxy.vercel.app/image-stitcher)               | Combine multiple images into one               |
-| [Base64 Image Encoder](https://tool-boxy.vercel.app/base64-image-encoder)   | Embed images as Base64 for CSS/HTML            |
 | [Favicon Generator](https://tool-boxy.vercel.app/favicon-generator)         | Favicon sizes + HTML snippets                  |
 | [QR Code Generator](https://tool-boxy.vercel.app/qr-code-generator)         | Customisable QR codes from URL or text         |
-| [SVG Viewer](https://tool-boxy.vercel.app/svg-viewer)                       | Paste SVG and preview with zoom                |
-| [ASCII Art Generator](https://tool-boxy.vercel.app/ascii-art-generator)     | Convert images into ASCII art                  |
-| [Post Composer](https://tool-boxy.vercel.app/post-composer)                 | Design social posts with text, shapes & images |
 
-### 💻 Developer
+### 📄 Documents
 
-| Tool                                                                        | Description                                       |
-| :-------------------------------------------------------------------------- | :------------------------------------------------ |
-| [Code Snippet](https://tool-boxy.vercel.app/code-snippet)                   | Create and export styled code screenshots         |
-| [Document Annotator](https://tool-boxy.vercel.app/document-annotator)       | Annotate PDFs & images (shapes, text, redactions) |
-| [HTML Viewer](https://tool-boxy.vercel.app/html-viewer)                     | Live HTML preview with Tailwind & CSS             |
-| [Markdown Live Preview](https://tool-boxy.vercel.app/markdown-live-preview) | Write markdown and preview side by side           |
-| [JSON Viewer](https://tool-boxy.vercel.app/json-viewer)                     | Edit, search & explore JSON (tree + raw)          |
-| [CSV Viewer](https://tool-boxy.vercel.app/csv-viewer)                       | Search, sort, filter & export CSV tables          |
-| [Code Viewer](https://tool-boxy.vercel.app/code-viewer)                     | Local folder audit · grep · TODOs · insights      |
-| [PDF Toolkit](https://tool-boxy.vercel.app/pdf-toolkit)                     | Preview, merge, split, organize, and convert PDFs |
-| [Meta Tag Generator](https://tool-boxy.vercel.app/meta-tag-generator)       | SEO & social sharing meta tags                    |
+| Tool                                                                  | Description                                       |
+| :-------------------------------------------------------------------- | :------------------------------------------------ |
+| [Document Annotator](https://tool-boxy.vercel.app/document-annotator) | Annotate PDFs & images (shapes, text, redactions) |
+| [PDF Toolkit](https://tool-boxy.vercel.app/pdf-toolkit)               | Preview, merge, split, organize, and convert PDFs |
+
+### 💻 Code
+
+| Tool                                                                        | Description                                   |
+| :-------------------------------------------------------------------------- | :-------------------------------------------- |
+| [HTML Viewer](https://tool-boxy.vercel.app/html-viewer)                     | Live HTML preview with Tailwind & CSS         |
+| [Markdown Live Preview](https://tool-boxy.vercel.app/markdown-live-preview) | Write markdown and preview side by side       |
+| [JSON Viewer](https://tool-boxy.vercel.app/json-viewer)                     | Edit, search & explore JSON (tree + raw)      |
+| [CSV Viewer](https://tool-boxy.vercel.app/csv-viewer)                       | Search, sort, filter & export CSV tables      |
+| [Code Viewer](https://tool-boxy.vercel.app/code-viewer)                     | Local folder audit · grep · TODOs · insights  |
+| [SVG Viewer](https://tool-boxy.vercel.app/svg-viewer)                       | Paste SVG and preview with zoom               |
+| [Meta Tag Generator](https://tool-boxy.vercel.app/meta-tag-generator)       | SEO & social sharing meta tags                |
 
 ### ✍️ Text
 
@@ -116,7 +128,7 @@ fast, frictionless answers without opening a dozen browser tabs. 🚀
 | [Glyph Browser](https://tool-boxy.vercel.app/glyph-browser)                 | Browse Unicode glyphs by block         |
 | [World Scripts](https://tool-boxy.vercel.app/world-scripts)                 | Explore alphabets & writing systems    |
 
-### 🔄 Converters
+### 🔧 Utilities
 
 | Tool                                                                  | Description                                    |
 | :-------------------------------------------------------------------- | :--------------------------------------------- |
